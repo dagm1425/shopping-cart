@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Nav = (props) => {
-  const { cart } = props;
+  const { cart, openCart } = props;
   const linkStyle = { textDecoration: "none", color: "inherit" };
 
   return (
@@ -15,7 +15,7 @@ const Nav = (props) => {
         <Link style={linkStyle} to="/shop">
           <li>Shop</li>
         </Link>
-        <li>{cart.length}</li>
+        <li onClick={openCart}>{cart.length}</li>
       </ul>
     </nav>
   );

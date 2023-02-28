@@ -10,6 +10,7 @@ function App() {
   const [items, setItems] = useState([]);
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   useEffect(() => {
     setTotalPrice(computeTotalPrice());
@@ -64,9 +65,17 @@ function App() {
     setCart(cartUpdate);
   };
 
+  const openCart = () => {
+    setIsCartOpen(true);
+  };
+
+  const closeCart = () => {
+    setIsCartOpen(false);
+  };
+
   return (
     <>
-      <Nav cart={cart} />
+      <Nav cart={cart} openCart={openCart} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -77,11 +86,15 @@ function App() {
         />
         <Route path="*" element={<Home />} />
       </Routes>
+      {/* {isCartOpen && ( */}
       <Cart
         cart={cart}
         totalPrice={totalPrice}
         updateQuantity={updateQuantity}
+        isCartOpen={isCartOpen}
+        closeCart={closeCart}
       />
+      {/* )} */}
     </>
   );
 }
