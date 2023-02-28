@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Nav = (props) => {
-  const { cart, totalPrice } = props;
+  const { cart } = props;
   const linkStyle = { textDecoration: "none", color: "inherit" };
 
   return (
@@ -16,7 +16,6 @@ const Nav = (props) => {
           <li>Shop</li>
         </Link>
         <li>{cart.length}</li>
-        <li style={{ fontWeight: "bold" }}>{totalPrice}</li>
       </ul>
     </nav>
   );

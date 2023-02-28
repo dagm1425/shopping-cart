@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Nav from "./components/Nav";
+import Cart from "./components/Cart";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 
@@ -44,9 +45,28 @@ function App() {
     } else setCart((prevCart) => [...prevCart, item]);
   };
 
+  const updateQuantity = (op, id) => {
+    let cartUpdate;
+    const item = cart.find((item) => item.id === id);
+
+    if (item.quantity == 1 && op === "-")
+      cartUpdate = cart.filter((item) => item.id !== id);
+    else
+      cartUpdate = cart.map((el) => {
+        if (el.id === id) {
+          return op === "-"
+            ? { ...el, quantity: el.quantity - 1 }
+            : { ...el, quantity: el.quantity + 1 };
+        }
+        return el;
+      });
+
+    setCart(cartUpdate);
+  };
+
   return (
     <>
-      <Nav cart={cart} totalPrice={totalPrice} />
+      <Nav cart={cart} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -57,6 +77,11 @@ function App() {
         />
         <Route path="*" element={<Home />} />
       </Routes>
+      <Cart
+        cart={cart}
+        totalPrice={totalPrice}
+        updateQuantity={updateQuantity}
+      />
     </>
   );
 }
