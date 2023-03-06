@@ -18,7 +18,7 @@ export default function Shop(props) {
           id={item.id}
           title={item.title}
           price={item.price}
-          image={item.image}
+          img={item.img}
           addToCart={addToCart}
         />
       ))}

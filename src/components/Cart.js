@@ -11,7 +11,7 @@ export default function Cart(props) {
       key={item.id}
       id={item.id}
       title={item.title}
-      image={item.image}
+      img={item.img}
       quantity={item.quantity}
       price={item.price}
       updateQuantity={updateQuantity}

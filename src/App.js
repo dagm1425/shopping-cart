@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import products from "./data/allProducts";
 import Nav from "./components/Nav";
 import Cart from "./components/Cart";
 import Home from "./pages/Home";
@@ -16,18 +17,24 @@ function App() {
     setTotalPrice(computeTotalPrice());
   }, [cart]);
 
-  const loadItems = async () => {
-    setItems(await fetchItems());
+  const loadItems = () => {
+    setItems(products);
   };
 
-  const fetchItems = async () => {
-    const response = await fetch(
-      "https://fakestoreapi.com/products/category/electronics"
-    );
-    let data = await response.json();
+  // const loadItems = async () => {
+  //   setItems(await fetchItems());
+  // };
 
-    return data.map((el) => ({ ...el, quantity: 1 }));
-  };
+  // const fetchItems = async () => {
+  //   const response = await fetch("https://fakestoreapi.com/products");
+  //   let data = await response.json();
+  //   let products = data.filter(
+  //     (el) =>
+  //       el.category === "women's clothing" || el.category === "men's clothing"
+  //   );
+  //   console.log(products);
+  //   return products.map((el) => ({ ...el, quantity: 1 }));
+  // };
 
   const computeTotalPrice = () => {
     return cart.reduce((total, el) => total + el.price * el.quantity, 0);
@@ -86,7 +93,6 @@ function App() {
         />
         <Route path="*" element={<Home />} />
       </Routes>
-      {/* {isCartOpen && ( */}
       <Cart
         cart={cart}
         totalPrice={totalPrice}
@@ -94,7 +100,6 @@ function App() {
         isCartOpen={isCartOpen}
         closeCart={closeCart}
       />
-      {/* )} */}
     </>
   );
 }

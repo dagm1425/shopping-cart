@@ -3,11 +3,11 @@ import React from "react";
 import styled from "styled-components";
 
 export default function CartItem(props) {
-  const { id, title, quantity, image, price, updateQuantity } = props;
+  const { id, title, quantity, img, price, updateQuantity } = props;
 
   return (
     <ItemWrapper>
-      <Img src={image} alt="item-img" />
+      <Img src={img} alt="item-img" />
       <div>
         <p style={{ fontWeight: "bold" }}>{title}</p>
         <p>{price}</p>
