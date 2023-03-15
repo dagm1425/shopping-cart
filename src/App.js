@@ -6,8 +6,11 @@ import Nav from "./components/Nav";
 import Cart from "./components/Cart";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
+import bg from "./data/images/bg_main.jpg";
+import styled, { css } from "styled-components";
 
 function App() {
+  const [bgImg, setbgImg] = useState(true);
   const [items, setItems] = useState([]);
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -80,11 +83,19 @@ function App() {
     setIsCartOpen(false);
   };
 
+  const setBg = () => {
+    setbgImg(true);
+  };
+
+  const rmBg = () => {
+    setbgImg(false);
+  };
+
   return (
-    <>
-      <Nav cart={cart} openCart={openCart} />
+    <Wrapper bgImg={bgImg}>
+      <Nav cart={cart} openCart={openCart} setBg={setBg} rmBg={rmBg} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home rmBg={rmBg} />} />
         <Route
           path="/shop"
           element={
@@ -99,9 +110,23 @@ function App() {
         updateQuantity={updateQuantity}
         isCartOpen={isCartOpen}
         closeCart={closeCart}
+        rmBg={rmBg}
       />
-    </>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  min-height: 100vh;
+  background: transparent;
+
+  ${(props) =>
+    props.bgImg &&
+    css`
+      color: #fff;
+      background: url(${bg}) no-repeat center center fixed;
+      background-size: cover;
+    `}
+`;
 
 export default App;

@@ -1,9 +1,11 @@
 nav {
   display: flex;
-  min-height: 10vh;
-  justify-content: space-around;
+  min-height: 15vh;
+  width: 85%;
+  margin: 0 auto;
+  justify-content: space-between;
   align-items: center;
-  background-color: beige;
+  background-color: transparent;
   text-decoration: none;
 }
 
@@ -13,3 +15,4 @@ ul {
   justify-content: space-around;
   list-style-type: none;
 }
+

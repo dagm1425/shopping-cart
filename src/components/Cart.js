@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import CartItem from "./CartItem";
 
 export default function Cart(props) {
-  const { cart, totalPrice, updateQuantity, isCartOpen, closeCart } = props;
+  const { cart, totalPrice, updateQuantity, isCartOpen, closeCart, rmBg } =
+    props;
   const cartItems = cart.map((item) => (
     <CartItem
       key={item.id}
@@ -33,7 +34,9 @@ export default function Cart(props) {
           <>
             <h3>Your cart is empty.</h3>
             <button type="button" onClick={closeCart}>
-              <Link to="/shop">Browse items</Link>
+              <Link to="/shop" onClick={rmBg}>
+                Browse items
+              </Link>
             </button>
           </>
         )}
