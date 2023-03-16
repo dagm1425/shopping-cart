@@ -22,6 +22,7 @@ const products = [
   {
     id: uniqid(),
     title: "Hanes Sport Women's Performance Fleece Full Zip Hoodie",
+    brand: "Hanes",
     img: hanesHoodie,
     gallery: [hanesHoodie, hanesHoodie1],
     price: 25,
@@ -32,6 +33,7 @@ const products = [
   {
     id: uniqid(),
     title: "C9 Champion Women's Active Tee",
+    brand: "Champion",
     img: c9ActiveTee,
     gallery: [c9ActiveTee, c9ActiveTee1],
     price: 12,
@@ -42,6 +44,7 @@ const products = [
   {
     id: uniqid(),
     title: "C9 Champion Women's Full Zip Cardio Jacket",
+    brand: "Champion",
     img: c9Hoodie,
     gallery: [c9Hoodie, c9Hoodie1],
     price: 27,
@@ -52,6 +55,7 @@ const products = [
   {
     id: uniqid(),
     title: "Under Armour Women's Tech V-Neck Short-Sleeve T-Shirt",
+    brand: "Under Armour",
     img: uaActiveTee,
     gallery: [uaActiveTee, uaActiveTee1],
     price: 11,
@@ -62,6 +66,7 @@ const products = [
   {
     id: uniqid(),
     title: "Under Armour Men's Raid 2.0 Workout Gym Shorts",
+    brand: "Under Armour",
     img: uaGymshortsM,
     gallery: [uaGymshortsM, uaGymshortsM1],
     price: 17.5,
@@ -73,6 +78,7 @@ const products = [
     id: uniqid(),
     title:
       "Hanes Sport Men's Long-Sleeve T-Shirt Pack, Cool DRI Moisture-Wicking Performance T-Shirts, Performance Tee",
+    brand: "Hanes",
     img: hanesActiveShirtM,
     gallery: [hanesActiveShirtM, hanesActiveShirtM1],
     price: 18.24,
@@ -83,6 +89,7 @@ const products = [
   {
     id: uniqid(),
     title: "Under Armour Men's HeatGear Compression Long-Sleeve T-Shirt",
+    brand: "Under Armour",
     img: uaActiveShirtM,
     gallery: [uaActiveShirtM, uaActiveShirtM1],
     price: 28.9,
@@ -93,6 +100,7 @@ const products = [
   {
     id: uniqid(),
     title: "Under Armour Men's Tech 2.0 Hoodie",
+    brand: "Under Armour",
     img: uaActiveHoodieM,
     gallery: [uaActiveHoodieM, uaActiveHoodieM1],
     price: 25.21,
@@ -103,6 +111,7 @@ const products = [
   {
     id: uniqid(),
     title: "Under Armour Men's Tech 2.0 Short-Sleeve T-Shirt",
+    brand: "Under Armour",
     img: uaTechTeeM,
     gallery: [uaTechTeeM, uaTechTeeM1],
     price: 18.75,
