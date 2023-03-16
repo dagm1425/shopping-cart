@@ -1,21 +1,24 @@
 /* eslint-disable react/prop-types */
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function ItemCard(props) {
   const { id, title, price, img, addToCart } = props;
 
   return (
     <Card>
-      <Img src={img} alt="item-img"></Img>
-      <h3>{title}</h3>
-      <p>{price}</p>
-      <button
-        onClick={() => {
-          addToCart(id);
-        }}
-      >
-        Add to cart
-      </button>
+      <Link to={`/shop/${id}`}>
+        <Img src={img} alt="item-img"></Img>
+        <h3>{title}</h3>
+        <p>{price}</p>
+        <button
+          onClick={() => {
+            addToCart(id);
+          }}
+        >
+          Add to cart
+        </button>
+      </Link>
     </Card>
   );
 }

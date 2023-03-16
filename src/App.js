@@ -6,6 +6,7 @@ import Nav from "./components/Nav";
 import Cart from "./components/Cart";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
+import ItemDetail from "./pages/ItemDetail";
 import bg from "./data/images/bg_main.jpg";
 import styled, { css } from "styled-components";
 
@@ -101,6 +102,10 @@ function App() {
           element={
             <Shop loadItems={loadItems} items={items} addToCart={addToCart} />
           }
+        />
+        <Route
+          path="/shop/:id"
+          element={<ItemDetail items={items} addToCart={addToCart} />}
         />
         <Route path="*" element={<Home />} />
       </Routes>
