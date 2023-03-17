@@ -84,7 +84,7 @@ const products = [
     price: 18.24,
     quantity: 1,
     gender: "man",
-    rating: 4.4,
+    rating: 4.5,
   },
   {
     id: uniqid(),
@@ -95,7 +95,7 @@ const products = [
     price: 28.9,
     quantity: 1,
     gender: "man",
-    rating: 4.6,
+    rating: 3.2,
   },
   {
     id: uniqid(),
