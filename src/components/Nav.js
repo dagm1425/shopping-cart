@@ -7,17 +7,16 @@ import { IconContext } from "react-icons";
 
 const Nav = (props) => {
   const { cart, openCart, setBg, rmBg, bgImg } = props;
-  const linkStyle = { textDecoration: "none", color: "inherit" };
 
   return (
     <Wrapper navBg={!bgImg}>
-      <Link style={linkStyle} to="/" onClick={setBg}>
+      <StyledLink fullWidth to="/" onClick={setBg}>
         <BrandName>athletic outfitters</BrandName>
-      </Link>
+      </StyledLink>
       <Div>
-        <Link style={linkStyle} to="/shop" onClick={rmBg}>
+        <StyledLink to="/shop" onClick={rmBg}>
           <Li>Shop</Li>
-        </Link>
+        </StyledLink>
         <Cart onClick={openCart}>
           <IconContext.Provider
             value={{
@@ -34,6 +33,17 @@ const Nav = (props) => {
 };
 
 export default Nav;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+
+  ${(props) =>
+    props.fullWidth &&
+    css`
+      width: 100%;
+    `}
+`;
 
 const Li = styled.p`
   position: relative;
@@ -61,7 +71,7 @@ const Wrapper = styled.nav`
   min-height: 8vh;
   width: 100%;
   margin: 0 auto;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   background-color: transparent;
   text-decoration: none;
@@ -75,6 +85,8 @@ const Wrapper = styled.nav`
 `;
 
 const BrandName = styled.p`
+  width: 30%;
+  text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.15rem;
   height: 35px;
@@ -108,7 +120,7 @@ const CartIndex = styled.span`
   font-weight: 800;
   color: #ffd814;
   background-color: #232f3e;
-  padding: 1.75px;
+  padding: 2px;
   border: 2px solid #fff;
   border-radius: 50%;
 `;
