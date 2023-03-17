@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import styled, { css } from "styled-components";
 import ReactImageMagnify from "react-image-magnify";
+import ReactStars from "react-rating-stars-component";
 
 function ItemDetail({ items, addToCart }) {
   const { id } = useParams();
@@ -65,16 +66,26 @@ function ItemDetail({ items, addToCart }) {
                 height: "100%",
               },
             }}
+            style={{ zIndex: "10" }}
           />
+          <p>Roll over image to zoom in</p>
         </LeftDiv2>
       </LeftDiv>
       <RightDiv>
         <div>
           <p>Brand: {item.brand}</p>
-          <h2>{item.title}</h2>
+          <h2 style={{ marginBottom: "0.75rem" }}>{item.title}</h2>
+          <ReactStars
+            value={item.rating}
+            count={5}
+            size={24}
+            isHalf={true}
+            edit={false}
+            activeColor="#ffd700"
+            style={{ zIndex: "-1" }}
+          />
         </div>
-        <p>{item.rating}</p>
-        <h3>{item.price}</h3>
+        <h2>{"$" + item.price.toFixed(2)}</h2>
         <AddToCartBtn onClick={() => addToCart(item.id)}>
           add to cart
         </AddToCartBtn>
@@ -87,7 +98,7 @@ export default ItemDetail;
 
 const Wrapper = styled.div`
   max-width: 1200px;
-  margin: 2.5rem auto;
+  margin: 8rem auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 `;
@@ -95,7 +106,7 @@ const Wrapper = styled.div`
 const LeftDiv = styled.div`
   display: flex;
   height: 50vh;
-  gap: 1rem;
+  gap: 1.75rem;
 `;
 
 const LeftDiv1 = styled.div`
@@ -107,6 +118,12 @@ const LeftDiv1 = styled.div`
 const LeftDiv2 = styled.div`
   & img {
     object-fit: contain;
+  }
+  & p {
+    color: #565959;
+    margin-top: 1.75rem;
+    font-size: 0.875rem;
+    text-align: center;
   }
 `;
 
@@ -126,21 +143,31 @@ const ImgWrapper = styled.div`
 const SliderImg = styled.img`
   width: 70px;
   height: 70px;
+  margin: 4px;
   object-fit: contain;
 `;
 
 const RightDiv = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: 1rem;
+  align-items: flex-start;
+  gap: 1.75rem;
 `;
 
 const AddToCartBtn = styled.button`
   width: 40%;
+  background-color: #ffd814;
+  border: none;
+  border-radius: 25px;
+  border-color: #fcd200;
   padding: 1.25rem 2rem;
   letter-spacing: 0.05rem;
   font-weight: 700;
   text-transform: uppercase;
   cursor: pointer;
+  transition: 120ms ease-in;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
 `;

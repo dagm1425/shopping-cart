@@ -94,7 +94,13 @@ function App() {
 
   return (
     <Wrapper bgImg={bgImg}>
-      <Nav cart={cart} openCart={openCart} setBg={setBg} rmBg={rmBg} />
+      <Nav
+        cart={cart}
+        openCart={openCart}
+        setBg={setBg}
+        rmBg={rmBg}
+        bgImg={bgImg}
+      />
       <Routes>
         <Route path="/" element={<Home rmBg={rmBg} />} />
         <Route
