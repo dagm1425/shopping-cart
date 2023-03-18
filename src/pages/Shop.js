@@ -17,6 +17,7 @@ export default function Shop(props) {
           key={item.id}
           id={item.id}
           title={item.title}
+          rating={item.rating}
           price={item.price}
           img={item.img}
           addToCart={addToCart}
@@ -28,8 +29,8 @@ export default function Shop(props) {
 
 const ItemsGrid = styled.div`
   display: grid;
-  width: 70%;
-  margin: 3rem auto;
-  gap: 2rem;
-  grid-template-columns: repeat(5, 1fr);
+  width: 60%;
+  margin: 8rem auto;
+  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 `;
