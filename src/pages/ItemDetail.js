@@ -75,15 +75,18 @@ function ItemDetail({ items, addToCart }) {
         <div>
           <p>Brand: {item.brand}</p>
           <h2 style={{ marginBottom: "0.75rem" }}>{item.title}</h2>
-          <ReactStars
-            value={item.rating}
-            count={5}
-            size={24}
-            isHalf={true}
-            edit={false}
-            activeColor="#ffd700"
-            style={{ zIndex: "-1" }}
-          />
+          <StarsWrapper>
+            <ReactStars
+              value={item.rating}
+              count={5}
+              size={24}
+              isHalf={true}
+              edit={false}
+              activeColor="#faaf00"
+              style={{ zIndex: "-1" }}
+            />
+            <span>{item.rating}</span>
+          </StarsWrapper>
         </div>
         <h2>{"$" + item.price.toFixed(2)}</h2>
         <AddToCartBtn onClick={() => addToCart(item.id)}>
@@ -98,7 +101,8 @@ export default ItemDetail;
 
 const Wrapper = styled.div`
   max-width: 1200px;
-  margin: 8rem auto;
+  margin: 0 auto;
+  padding: 8rem 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 `;
@@ -152,6 +156,12 @@ const RightDiv = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 1.75rem;
+`;
+
+const StarsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 6px;
 `;
 
 const AddToCartBtn = styled.button`
