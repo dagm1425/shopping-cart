@@ -37,6 +37,9 @@ export default function ItemCard(props) {
 }
 
 const StyledLink = styled(Link)`
+  display: block;
+  padding: 1.25rem 0.75rem;
+  height: 91%;
   text-decoration: none;
   color: inherit;
 `;
@@ -60,16 +63,18 @@ const StarsWrapper = styled.div`
 `;
 
 const Card = styled.div`
-  padding: 1.25rem 0.75rem;
+  height: 485px;
   outline: none;
   border: 2px solid #fff;
   border-radius: 6px;
-  transition: all 120ms ease-in;
+  transition: border-color 100ms ease-in;
 
   &:hover {
     border-color: #eee;
   }
+
   &:hover button {
+    opacity: 1;
     visibility: visible;
   }
 `;
@@ -82,13 +87,16 @@ const Img = styled.img`
 
 const AddToCartBtn = styled.button`
   visibility: hidden;
+  opacity: 0;
   outline: none;
   border: none;
   width: 100%;
-  margin-top: 1.25rem;
-  padding: 0.75rem 1.125rem;
+  height: 9%;
+  padding: 0 1.125rem;
   background-color: #ffd814;
   border: none;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
   border-color: #fcd200;
   letter-spacing: 0.05rem;
   font-weight: 700;

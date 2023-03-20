@@ -30,7 +30,8 @@ export default function Shop(props) {
 const ItemsGrid = styled.div`
   display: grid;
   width: 60%;
-  margin: 8rem auto;
+  padding: 8rem 0;
+  margin: 0 auto;
   gap: 2.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 `;
