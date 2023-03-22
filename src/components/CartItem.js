@@ -48,7 +48,7 @@ const ItemWrapper = styled.div`
   width: 90%;
   margin: 0 auto;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #b0b0b0;
 `;
 
 const ImgWrapper = styled.div`
