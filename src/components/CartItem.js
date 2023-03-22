@@ -9,8 +9,10 @@ export default function CartItem(props) {
 
   return (
     <ItemWrapper>
-      <Img src={img} alt="item-img" />
-      <div>
+      <ImgWrapper>
+        <Img src={img} alt="item-img" />
+      </ImgWrapper>
+      <DetailWrapper>
         <TitleP>{title}</TitleP>
         <PriceP>{"$" + price.toFixed(2)}</PriceP>
         <QtyController>
@@ -34,7 +36,7 @@ export default function CartItem(props) {
             </IconContext.Provider>
           </QtyBtn>
         </QtyController>
-      </div>
+      </DetailWrapper>
     </ItemWrapper>
   );
 }
@@ -49,11 +51,20 @@ const ItemWrapper = styled.div`
   border-bottom: 1px solid #000;
 `;
 
-const Img = styled.img`
+const ImgWrapper = styled.div`
   height: 110px;
   width: 110px;
-  object-fit: contain;
   background-color: #fff;
+`;
+
+const Img = styled.img`
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+`;
+
+const DetailWrapper = styled.div`
+  width: 420px;
 `;
 
 const TitleP = styled.p`

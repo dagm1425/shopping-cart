@@ -81,7 +81,6 @@ const CartWrapper = styled.div`
   transition: 200ms ease-in-out;
   width: 35%;
   height: 100vh;
-  padding: 0 4rem;
   top: 0;
   right: 0;
   z-index: 30;
