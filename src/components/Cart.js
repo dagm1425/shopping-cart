@@ -68,6 +68,7 @@ export default function Cart(props) {
           </EmptyCartWrapper>
         )}
       </CartWrapper>
+
       <Overlay active={isCartOpen} onClick={closeCart} />
     </>
   );
@@ -83,7 +84,7 @@ const CartWrapper = styled.div`
   padding: 0 4rem;
   top: 0;
   right: 0;
-  z-index: 10;
+  z-index: 30;
 
   ${({ active }) =>
     active &&
@@ -102,6 +103,7 @@ const Overlay = styled.div`
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   pointer-events: none;
+  z-index: 10;
 
   ${({ active }) =>
     active &&
