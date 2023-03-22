@@ -85,6 +85,7 @@ const CartWrapper = styled.div`
   top: 0;
   right: 0;
   z-index: 30;
+  overflow-y: scroll;
 
   ${({ active }) =>
     active &&
@@ -199,7 +200,7 @@ const MainBtn = styled.button`
 `;
 
 const CheckoutBtn = styled(MainBtn)`
-  margin-bottom: 6rem;
+  margin: 6rem 0rem;
 `;
 
 const CartItemsWrapper = styled.div`
