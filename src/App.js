@@ -55,6 +55,8 @@ function App() {
 
       setCart(cartUpdate);
     } else setCart((prevCart) => [...prevCart, item]);
+
+    openCart();
   };
 
   const updateQuantity = (op, id) => {
