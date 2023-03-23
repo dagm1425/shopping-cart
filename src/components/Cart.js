@@ -25,15 +25,18 @@ export default function Cart(props) {
   return (
     <>
       <CartWrapper active={isCartOpen}>
-        <CloseBtn onClick={closeCart}>
-          <IconContext.Provider
-            value={{
-              style: { fontSize: "26px", color: "#000" },
-            }}
-          >
-            <AiOutlineClose />
-          </IconContext.Provider>
-        </CloseBtn>
+        <CartHeader>
+          <HeaderH3>Shopping Cart</HeaderH3>
+          <CloseBtn onClick={closeCart}>
+            <IconContext.Provider
+              value={{
+                style: { fontSize: "26px", color: "#000" },
+              }}
+            >
+              <AiOutlineClose />
+            </IconContext.Provider>
+          </CloseBtn>
+        </CartHeader>
         {cart.length ? (
           <LoadedCartWrapper>
             <div>
@@ -112,10 +115,20 @@ const Overlay = styled.div`
   pointer-events: all;`}
 `;
 
+const CartHeader = styled.div`
+  height: 8%;
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const HeaderH3 = styled.h3`
+  line-height: 100%;
+`;
+
 const CloseBtn = styled.button`
-  position: absolute;
-  top: 6%;
-  right: 15%;
   background-color: transparent;
   border: none;
   outline: none;
@@ -123,7 +136,7 @@ const CloseBtn = styled.button`
 `;
 
 const LoadedCartWrapper = styled.div`
-  height: 100%;
+  height: 92%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -131,7 +144,7 @@ const LoadedCartWrapper = styled.div`
 `;
 
 const EmptyCartWrapper = styled.div`
-  height: 100%;
+  height: 92%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -206,5 +219,5 @@ const CartItemsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-top: 8rem;
+  margin-top: 3.75rem;
 `;
