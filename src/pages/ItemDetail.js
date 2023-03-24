@@ -74,7 +74,7 @@ function ItemDetail({ items, addToCart }) {
       <RightDiv>
         <div>
           <p>Brand: {item.brand}</p>
-          <h2 style={{ marginBottom: "0.75rem" }}>{item.title}</h2>
+          <TitleH2>{item.title}</TitleH2>
           <StarsWrapper>
             <ReactStars
               value={item.rating}
@@ -156,6 +156,10 @@ const RightDiv = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 1.75rem;
+`;
+
+const TitleH2 = styled.h2`
+  margin-bottom: 0.75rem;
 `;
 
 const StarsWrapper = styled.div`

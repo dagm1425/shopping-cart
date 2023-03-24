@@ -4,13 +4,11 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 function Home() {
-  const linkStyle = { textDecoration: "none", color: "inherit" };
-
   return (
     <Container>
       <H1>sweat in style</H1>
       <p>Grab your sportswear from our collection of renowned brands</p>
-      <Link style={linkStyle} to="/shop">
+      <Link to="/shop">
         <Button>shop now</Button>
       </Link>
     </Container>

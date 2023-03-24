@@ -62,9 +62,9 @@ export default function Cart(props) {
             >
               <AiOutlineShopping />
             </IconContext.Provider>
-            <Link to="/shop" style={{ width: "100%" }}>
+            <StyledLink to="/shop">
               <MainBtn onClick={closeCart}>Browse items</MainBtn>
-            </Link>
+            </StyledLink>
           </EmptyCartWrapper>
         )}
       </CartWrapper>
@@ -146,6 +146,10 @@ const EmptyCartWrapper = styled.div`
   flex-direction: column;
   justify-content: space-around;
   text-align: center;
+`;
+
+const StyledLink = styled(Link)`
+  width: 100%;
 `;
 
 const SubTotWrapper = styled.div`
