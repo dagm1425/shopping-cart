@@ -78,6 +78,31 @@ function App() {
     setCart(cartUpdate);
   };
 
+  const sortDefault = () => {
+    setItems(products);
+  };
+
+  const sortPriceLtoH = () => {
+    setItems((prevItems) => {
+      return prevItems.map((el) => el).sort((a, b) => a.price - b.price);
+    });
+  };
+
+  const sortPriceHtoL = () => {
+    setItems((prevItems) => {
+      return prevItems.map((el) => el).sort((a, b) => b.price - a.price);
+    });
+  };
+
+  const sortItems = (sorting) => {
+    console.log(products);
+    sorting === "sortDefault"
+      ? sortDefault()
+      : sorting === "sortPriceLtoH"
+      ? sortPriceLtoH()
+      : sortPriceHtoL();
+  };
+
   const openCart = () => {
     setIsCartOpen(true);
   };
@@ -108,7 +133,12 @@ function App() {
         <Route
           path="/shop"
           element={
-            <Shop loadItems={loadItems} items={items} addToCart={addToCart} />
+            <Shop
+              loadItems={loadItems}
+              sortItems={sortItems}
+              items={items}
+              addToCart={addToCart}
+            />
           }
         />
         <Route
