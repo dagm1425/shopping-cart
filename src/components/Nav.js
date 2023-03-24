@@ -67,6 +67,7 @@ const Li = styled.p`
 `;
 
 const Wrapper = styled.nav`
+  color: #fff;
   display: flex;
   min-height: 8vh;
   width: 100%;
@@ -80,7 +81,6 @@ const Wrapper = styled.nav`
     props.navBg &&
     css`
       background-color: #232f3e;
-      color: #fff;
     `}
 `;
 

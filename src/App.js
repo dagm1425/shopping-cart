@@ -95,7 +95,6 @@ function App() {
   };
 
   const sortItems = (sorting) => {
-    console.log(products);
     sorting === "sortDefault"
       ? sortDefault()
       : sorting === "sortPriceLtoH"
@@ -166,7 +165,6 @@ const Wrapper = styled.div`
   ${(props) =>
     props.bgImg &&
     css`
-      color: #fff;
       background: url(${bg}) no-repeat center center fixed;
       background-size: cover;
     `}

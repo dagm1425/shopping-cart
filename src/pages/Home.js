@@ -20,11 +20,12 @@ function Home({ rmBg }) {
 export default Home;
 
 const Container = styled.div`
-  font-size: 1.25em;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   width: 75%;
+  font-size: 1.25em;
+  color: #fff;
   margin: 0 auto;
   padding-top: 9rem;
 `;
