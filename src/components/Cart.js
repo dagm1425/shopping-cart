@@ -78,7 +78,7 @@ export default function Cart(props) {
 }
 
 const CartWrapper = styled.div`
-  background-color: #eee;
+  background-color: #f7f7f7;
   position: fixed;
   transform: translateX(100%);
   transition: 200ms ease-in-out;
@@ -174,6 +174,7 @@ const MainBtn = styled.button`
   font-weight: 700;
   text-transform: uppercase;
   width: 75%;
+  background-color: transparent;
   padding: 2rem 0;
   border: 1px solid #000;
   outline: none;
