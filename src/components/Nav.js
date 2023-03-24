@@ -6,15 +6,15 @@ import { AiOutlineShopping } from "react-icons/ai";
 import { IconContext } from "react-icons";
 
 const Nav = (props) => {
-  const { cart, openCart, setBg, rmBg, bgImg } = props;
+  const { cart, openCart, location } = props;
 
   return (
-    <Wrapper navBg={!bgImg}>
-      <StyledLink fullWidth to="/" onClick={setBg}>
+    <Wrapper navBg={location !== ""}>
+      <StyledLink fullWidth to="/">
         <BrandName>athletic outfitters</BrandName>
       </StyledLink>
       <Div>
-        <StyledLink to="/shop" onClick={rmBg}>
+        <StyledLink to="/shop">
           <Li>Shop</Li>
         </StyledLink>
         <Cart onClick={openCart}>

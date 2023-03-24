@@ -8,8 +8,7 @@ import { AiOutlineShopping } from "react-icons/ai";
 import { IconContext } from "react-icons";
 
 export default function Cart(props) {
-  const { cart, totalPrice, updateQuantity, isCartOpen, closeCart, rmBg } =
-    props;
+  const { cart, totalPrice, updateQuantity, isCartOpen, closeCart } = props;
   const cartItems = cart.map((item) => (
     <CartItem
       key={item.id}
@@ -64,9 +63,7 @@ export default function Cart(props) {
               <AiOutlineShopping />
             </IconContext.Provider>
             <MainBtn onClick={closeCart}>
-              <Link to="/shop" onClick={rmBg}>
-                Browse items
-              </Link>
+              <Link to="/shop">Browse items</Link>
             </MainBtn>
           </EmptyCartWrapper>
         )}

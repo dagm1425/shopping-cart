@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 import products from "./data/allProducts";
 import Nav from "./components/Nav";
@@ -11,11 +11,12 @@ import bg from "./data/images/bg_main.jpg";
 import styled, { css } from "styled-components";
 
 function App() {
-  const [bgImg, setbgImg] = useState(true);
   const [items, setItems] = useState([]);
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const path = useLocation().pathname;
+  const location = path.split("/")[1];
 
   useEffect(() => {
     setTotalPrice(computeTotalPrice());
@@ -110,25 +111,11 @@ function App() {
     setIsCartOpen(false);
   };
 
-  const setBg = () => {
-    setbgImg(true);
-  };
-
-  const rmBg = () => {
-    setbgImg(false);
-  };
-
   return (
-    <Wrapper bgImg={bgImg}>
-      <Nav
-        cart={cart}
-        openCart={openCart}
-        setBg={setBg}
-        rmBg={rmBg}
-        bgImg={bgImg}
-      />
+    <Wrapper bgImg={location === ""}>
+      <Nav cart={cart} openCart={openCart} location={location} />
       <Routes>
-        <Route path="/" element={<Home rmBg={rmBg} />} />
+        <Route path="/" element={<Home />} />
         <Route
           path="/shop"
           element={
@@ -152,7 +139,6 @@ function App() {
         updateQuantity={updateQuantity}
         isCartOpen={isCartOpen}
         closeCart={closeCart}
-        rmBg={rmBg}
       />
     </Wrapper>
   );
