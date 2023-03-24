@@ -25,7 +25,7 @@ export default function CartItem(props) {
               <AiOutlineMinus />
             </IconContext.Provider>
           </QtyBtn>
-          <QtyP>{quantity}</QtyP>
+          <p>{quantity}</p>
           <QtyBtn onClick={() => updateQuantity("+", id)}>
             <IconContext.Provider
               value={{
@@ -90,11 +90,4 @@ const QtyBtn = styled.button`
   outline: none;
   background: transparent;
   cursor: pointer;
-`;
-
-const QtyP = styled.p`
-  // width: 50px;
-  // height: 28px;
-  // text-align: center;
-  // margin-top: 0.75rem;
 `;

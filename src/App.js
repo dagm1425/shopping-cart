@@ -26,21 +26,6 @@ function App() {
     setItems(products);
   };
 
-  // const loadItems = async () => {
-  //   setItems(await fetchItems());
-  // };
-
-  // const fetchItems = async () => {
-  //   const response = await fetch("https://fakestoreapi.com/products");
-  //   let data = await response.json();
-  //   let products = data.filter(
-  //     (el) =>
-  //       el.category === "women's clothing" || el.category === "men's clothing"
-  //   );
-  //   console.log(products);
-  //   return products.map((el) => ({ ...el, quantity: 1 }));
-  // };
-
   const computeTotalPrice = () => {
     return cart.reduce((total, el) => total + el.price * el.quantity, 0);
   };

@@ -14,22 +14,7 @@ function ItemDetail({ items, addToCart }) {
   const hoverHandler = (img) => {
     setImg(img);
     setActive(img);
-    // refs.current[i].classList.add("active");
-    // for (let j = 0; j < item.gallery.length; j++) {
-    //   if (i !== j) {
-    //     refs.current[j].classList.remove("active");
-    //   }
-    // }
   };
-
-  // const refs = useRef([]);
-  // refs.current = [];
-
-  // const addRefs = (el) => {
-  //   if (el && !refs.current.includes(el)) {
-  //     refs.current.push(el);
-  //   }
-  // };
 
   return (
     <Wrapper>
