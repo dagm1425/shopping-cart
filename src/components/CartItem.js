@@ -1,10 +1,10 @@
-/* eslint-disable react/prop-types */
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { IconContext } from "react-icons";
 
-export default function CartItem(props) {
+function CartItem(props) {
   const { id, title, quantity, img, price, updateQuantity } = props;
 
   return (
@@ -91,3 +91,14 @@ const QtyBtn = styled.button`
   background: transparent;
   cursor: pointer;
 `;
+
+CartItem.propTypes = {
+  id: PropTypes.string,
+  title: PropTypes.string,
+  quantity: PropTypes.number,
+  img: PropTypes.string,
+  price: PropTypes.number,
+  updateQuantity: PropTypes.func,
+};
+
+export default CartItem;

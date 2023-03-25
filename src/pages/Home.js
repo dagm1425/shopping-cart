@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -14,8 +13,6 @@ function Home() {
     </Container>
   );
 }
-
-export default Home;
 
 const Container = styled.div`
   display: flex;
@@ -53,3 +50,5 @@ const Button = styled.button`
     box-shadow: 5px 5px 0 #000, 5px 5px 0 1px #fff;
   }
 `;
+
+export default Home;

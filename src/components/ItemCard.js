@@ -1,9 +1,10 @@
-/* eslint-disable react/prop-types */
+import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 
-export default function ItemCard(props) {
+function ItemCard(props) {
   const { id, title, price, rating, img, addToCart } = props;
 
   return (
@@ -108,3 +109,16 @@ const AddToCartBtn = styled.button`
     filter: brightness(0.9);
   }
 `;
+
+ItemCard.propTypes = {
+  id: PropTypes.string,
+  title: PropTypes.string,
+  quantity: PropTypes.number,
+  img: PropTypes.string,
+  price: PropTypes.number,
+  rating: PropTypes.number,
+  updateQuantity: PropTypes.func,
+  addToCart: PropTypes.func,
+};
+
+export default ItemCard;

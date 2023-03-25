@@ -1,11 +1,11 @@
-/* eslint-disable react/prop-types */
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { AiOutlineShopping } from "react-icons/ai";
 import { IconContext } from "react-icons";
 
-const Nav = (props) => {
+function Nav(props) {
   const { cart, openCart, location } = props;
 
   return (
@@ -30,9 +30,7 @@ const Nav = (props) => {
       </Div>
     </Wrapper>
   );
-};
-
-export default Nav;
+}
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -124,3 +122,11 @@ const CartIndex = styled.span`
   border: 2px solid #fff;
   border-radius: 50%;
 `;
+
+Nav.propTypes = {
+  cart: PropTypes.array,
+  openCart: PropTypes.func,
+  location: PropTypes.string,
+};
+
+export default Nav;

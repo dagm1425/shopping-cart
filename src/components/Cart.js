@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import CartItem from "./CartItem";
@@ -7,7 +7,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { AiOutlineShopping } from "react-icons/ai";
 import { IconContext } from "react-icons";
 
-export default function Cart(props) {
+function Cart(props) {
   const { cart, totalPrice, updateQuantity, isCartOpen, closeCart } = props;
   const cartItems = cart.map((item) => (
     <CartItem
@@ -223,3 +223,13 @@ const CartItemsWrapper = styled.div`
   gap: 1rem;
   margin-top: 3.75rem;
 `;
+
+Cart.propTypes = {
+  cart: PropTypes.array,
+  totalPrice: PropTypes.number,
+  updateQuantity: PropTypes.func,
+  isCartOpen: PropTypes.bool,
+  closeCart: PropTypes.func,
+};
+
+export default Cart;

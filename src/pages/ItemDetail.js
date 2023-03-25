@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import styled, { css } from "styled-components";
 import ReactImageMagnify from "react-image-magnify";
@@ -81,8 +81,6 @@ function ItemDetail({ items, addToCart }) {
     </Wrapper>
   );
 }
-
-export default ItemDetail;
 
 const Wrapper = styled.div`
   max-width: 1200px;
@@ -170,3 +168,10 @@ const AddToCartBtn = styled.button`
     filter: brightness(0.9);
   }
 `;
+
+ItemDetail.propTypes = {
+  items: PropTypes.array,
+  addToCart: PropTypes.func,
+};
+
+export default ItemDetail;

@@ -1,9 +1,9 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import ItemCard from "../components/ItemCard";
 
-export default function Shop(props) {
+function Shop(props) {
   const { loadItems, sortItems, items, addToCart } = props;
 
   useEffect(() => {
@@ -73,3 +73,12 @@ const ItemsGrid = styled.div`
   gap: 2.5rem;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 `;
+
+Shop.propTypes = {
+  items: PropTypes.array,
+  loadItems: PropTypes.func,
+  sortItems: PropTypes.func,
+  addToCart: PropTypes.func,
+};
+
+export default Shop;
