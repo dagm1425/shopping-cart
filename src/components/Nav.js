@@ -10,7 +10,7 @@ function Nav(props) {
 
   return (
     <Wrapper navBg={location !== ""}>
-      <StyledLink fullWidth to="/">
+      <StyledLink fullwidth="true" to="/">
         <BrandName>athletic outfitters</BrandName>
       </StyledLink>
       <Div>
@@ -37,7 +37,7 @@ const StyledLink = styled(Link)`
   color: inherit;
 
   ${(props) =>
-    props.fullWidth &&
+    props.fullwidth &&
     css`
       width: 100%;
     `}
