@@ -85,7 +85,11 @@ function App() {
   };
 
   const sortDefault = () => {
-    setItems(products);
+    setItems((prevItems) =>
+      prevItems.slice().sort((a, b) => {
+        return products.indexOf(a) - products.indexOf(b);
+      })
+    );
   };
 
   const sortPriceLtoH = () => {
