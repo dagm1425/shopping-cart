@@ -10,8 +10,8 @@ import hanesActiveShirtM from "./images/hanes_active_shirt_m.jpg";
 import hanesActiveShirtM1 from "./images/hanes_active_shirt_m_1.jpg";
 import uaActiveHoodieM from "./images/ua_active_hoodie_m.jpg";
 import uaActiveHoodieM1 from "./images/ua_active_hoodie_m_1.jpg";
-import uaActiveShirtM from "./images/ua_active_shirt_m.jpg";
-import uaActiveShirtM1 from "./images/ua_active_shirt_m_1.jpg";
+import championJoggerM from "./images/champion_jogger_m.jpg";
+import championJoggerM1 from "./images/champion_jogger_m_1.jpg";
 import uaGymshortsM from "./images/ua_gym_shorts_m.jpg";
 import uaGymshortsM1 from "./images/ua_gym_shorts_m_1.jpg";
 import uaTechTeeM1 from "./images/ua_tech_tee_m_1.jpg";
@@ -55,7 +55,7 @@ const products = [
   {
     id: uniqid(),
     title: "Under Armour Women's Tech V-Neck Short-Sleeve T-Shirt",
-    brand: "Under Armour",
+    brand: "Under_Armour",
     img: uaActiveTee,
     gallery: [uaActiveTee, uaActiveTee1],
     price: 11,
@@ -66,7 +66,7 @@ const products = [
   {
     id: uniqid(),
     title: "Under Armour Men's Raid 2.0 Workout Gym Shorts",
-    brand: "Under Armour",
+    brand: "Under_Armour",
     img: uaGymshortsM,
     gallery: [uaGymshortsM, uaGymshortsM1],
     price: 17.5,
@@ -88,19 +88,19 @@ const products = [
   },
   {
     id: uniqid(),
-    title: "Under Armour Men's HeatGear Compression Long-Sleeve T-Shirt",
-    brand: "Under Armour",
-    img: uaActiveShirtM,
-    gallery: [uaActiveShirtM, uaActiveShirtM1],
-    price: 28.9,
+    title: "Champion174 Mens Powerblend Graphic Jogger",
+    brand: "Champion",
+    img: championJoggerM,
+    gallery: [championJoggerM, championJoggerM1],
+    price: 24.9,
     quantity: 1,
     gender: "man",
-    rating: 3.2,
+    rating: 3.6,
   },
   {
     id: uniqid(),
     title: "Under Armour Men's Tech 2.0 Hoodie",
-    brand: "Under Armour",
+    brand: "Under_Armour",
     img: uaActiveHoodieM,
     gallery: [uaActiveHoodieM, uaActiveHoodieM1],
     price: 25.21,
@@ -111,7 +111,7 @@ const products = [
   {
     id: uniqid(),
     title: "Under Armour Men's Tech 2.0 Short-Sleeve T-Shirt",
-    brand: "Under Armour",
+    brand: "Under_Armour",
     img: uaTechTeeM,
     gallery: [uaTechTeeM, uaTechTeeM1],
     price: 18.75,

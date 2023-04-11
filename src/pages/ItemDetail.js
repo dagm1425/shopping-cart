@@ -58,7 +58,11 @@ function ItemDetail({ items, addToCart }) {
       </LeftDiv>
       <RightDiv>
         <div>
-          <p>Brand: {item.brand}</p>
+          <p>
+            {item.brand.includes("_")
+              ? item.brand.replace("_", " ")
+              : item.brand}
+          </p>
           <TitleH2>{item.title}</TitleH2>
           <StarsWrapper>
             <ReactStars
