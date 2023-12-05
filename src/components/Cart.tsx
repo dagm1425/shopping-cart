@@ -1,14 +1,27 @@
 import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import CartItem from "./CartItem";
 import { AiOutlineClose } from "react-icons/ai";
 import { AiOutlineShopping } from "react-icons/ai";
 import { IconContext } from "react-icons";
+import { Item } from "src/typings/sharedTypes";
 
-function Cart(props) {
-  const { cart, totalPrice, updateQuantity, isCartOpen, closeCart } = props;
+interface CartProps {
+  cart: Item[];
+  totalPrice: number;
+  updateQuantity: (op: string, id: string) => void;
+  isCartOpen: boolean;
+  closeCart: () => void;
+}
+
+const Cart: React.FC<CartProps> = ({
+  cart,
+  totalPrice,
+  updateQuantity,
+  isCartOpen,
+  closeCart,
+}) => {
   const cartItems = cart.map((item) => (
     <CartItem
       key={item.id}
@@ -23,7 +36,7 @@ function Cart(props) {
 
   return (
     <>
-      <CartWrapper active={isCartOpen}>
+      <CartWrapper $active={isCartOpen}>
         <CartHeader>
           <HeaderH3>Shopping Cart</HeaderH3>
           <CloseBtn onClick={closeCart}>
@@ -69,12 +82,12 @@ function Cart(props) {
         )}
       </CartWrapper>
 
-      <Overlay active={isCartOpen} onClick={closeCart} />
+      <Overlay $active={isCartOpen} onClick={closeCart} />
     </>
   );
-}
+};
 
-const CartWrapper = styled.div`
+const CartWrapper = styled.div<{ $active?: boolean }>`
   background-color: #f7f7f7;
   position: fixed;
   transform: translateX(100%);
@@ -86,14 +99,14 @@ const CartWrapper = styled.div`
   z-index: 30;
   overflow-y: scroll;
 
-  ${({ active }) =>
-    active &&
-    `
-  transform: translateX(0%);
-`}
+  ${(props) =>
+    props.$active &&
+    css`
+      transform: translateX(0%);
+    `}
 `;
 
-const Overlay = styled.div`
+const Overlay = styled.div<{ $active?: boolean }>`
   position: fixed;
   opacity: 0;
   transition: 200ms ease-in-out;
@@ -105,11 +118,12 @@ const Overlay = styled.div`
   pointer-events: none;
   z-index: 10;
 
-  ${({ active }) =>
-    active &&
-    `
-  opacity: 1;
-  pointer-events: all;`}
+  ${(props) =>
+    props.$active &&
+    css`
+      opacity: 1;
+      pointer-events: all;
+    `}
 `;
 
 const CartHeader = styled.div`
@@ -223,13 +237,5 @@ const CartItemsWrapper = styled.div`
   gap: 1rem;
   margin-top: 3.75rem;
 `;
-
-Cart.propTypes = {
-  cart: PropTypes.array,
-  totalPrice: PropTypes.number,
-  updateQuantity: PropTypes.func,
-  isCartOpen: PropTypes.bool,
-  closeCart: PropTypes.func,
-};
 
 export default Cart;

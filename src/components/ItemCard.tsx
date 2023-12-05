@@ -1,12 +1,25 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 
-function ItemCard(props) {
-  const { id, title, price, rating, img, addToCart } = props;
+interface ItemCardProps {
+  id: string;
+  title: string;
+  price: number;
+  rating: number;
+  img: string;
+  addToCart: (id: string) => void;
+}
 
+const ItemCard: React.FC<ItemCardProps> = ({
+  id,
+  title,
+  price,
+  rating,
+  img,
+  addToCart,
+}) => {
   return (
     <Card>
       <StyledLink to={`/shop/${id}`}>
@@ -35,7 +48,7 @@ function ItemCard(props) {
       </AddToCartBtn>
     </Card>
   );
-}
+};
 
 const StyledLink = styled(Link)`
   display: block;
@@ -109,16 +122,5 @@ const AddToCartBtn = styled.button`
     filter: brightness(0.9);
   }
 `;
-
-ItemCard.propTypes = {
-  id: PropTypes.string,
-  title: PropTypes.string,
-  quantity: PropTypes.number,
-  img: PropTypes.string,
-  price: PropTypes.number,
-  rating: PropTypes.number,
-  updateQuantity: PropTypes.func,
-  addToCart: PropTypes.func,
-};
 
 export default ItemCard;

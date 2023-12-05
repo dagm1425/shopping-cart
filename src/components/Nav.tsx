@@ -1,16 +1,20 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { AiOutlineShopping } from "react-icons/ai";
 import { IconContext } from "react-icons";
+import { Item } from "src/typings/sharedTypes";
 
-function Nav(props) {
-  const { cart, openCart, location } = props;
+interface NavProps {
+  cart: Item[];
+  openCart: () => void;
+  location: string;
+}
 
+const Nav: React.FC<NavProps> = ({ cart, openCart, location }) => {
   return (
-    <Wrapper navBg={location !== ""}>
-      <StyledLink fullwidth="true" to="/">
+    <Wrapper $navbg={location !== ""}>
+      <StyledLink $fullwidth={true} to="/">
         <BrandName>athletic outfitters</BrandName>
       </StyledLink>
       <Div>
@@ -30,14 +34,14 @@ function Nav(props) {
       </Div>
     </Wrapper>
   );
-}
+};
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(Link)<{ $fullwidth?: boolean }>`
   text-decoration: none;
   color: inherit;
 
   ${(props) =>
-    props.fullwidth &&
+    props.$fullwidth &&
     css`
       width: 100%;
     `}
@@ -64,7 +68,7 @@ const Li = styled.p`
   }
 `;
 
-const Wrapper = styled.nav`
+const Wrapper = styled.nav<{ $navbg?: boolean }>`
   color: #fff;
   display: flex;
   min-height: 8vh;
@@ -76,7 +80,7 @@ const Wrapper = styled.nav`
   text-decoration: none;
 
   ${(props) =>
-    props.navBg &&
+    props.$navbg &&
     css`
       background-color: #232f3e;
     `}
@@ -122,11 +126,5 @@ const CartIndex = styled.span`
   border: 2px solid #fff;
   border-radius: 50%;
 `;
-
-Nav.propTypes = {
-  cart: PropTypes.array,
-  openCart: PropTypes.func,
-  location: PropTypes.string,
-};
 
 export default Nav;

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import "./App.css";
 import products from "./data/allProducts";
 import Nav from "./components/Nav";
 import Cart from "./components/Cart";
@@ -9,18 +8,22 @@ import Shop from "./pages/Shop";
 import ItemDetail from "./pages/ItemDetail";
 import bg from "./data/images/bg_main.jpg";
 import styled, { css } from "styled-components";
+import { Item } from "./typings/sharedTypes";
+import { Filters } from "./typings/sharedTypes";
 
 function App() {
-  const [items, setItems] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [filters, setFilters] = useState({
+  const [items, setItems] = useState<Item[]>([]);
+  const [cart, setCart] = useState<Item[]>([]);
+  const [filters, setFilters] = useState<Filters>({
     gender: { man: false, woman: false },
     brand: { Hanes: false, Champion: false, Under_Armour: false },
     price: { upTo20: false, from20To25: false, from25To30: false },
   });
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [selectValue, setSelectValue] = useState("sortDefault");
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
+  const [selectValue, setSelectValue] = useState<
+    "sortDefault" | "sortPriceLtoH" | "sortPriceHtoL"
+  >("sortDefault");
   const path = useLocation().pathname;
   const location = path.split("/")[1];
 
@@ -40,26 +43,28 @@ function App() {
     return cart.reduce((total, el) => total + el.price * el.quantity, 0);
   };
 
-  const addToCart = (id) => {
+  const addToCart = (id: string) => {
     const item = items.find((item) => item.id === id);
 
-    if (cart.some((el) => el.title === item.title)) {
+    if (!item) return;
+
+    if (cart.some((el) => el.id === id)) {
       const cartUpdate = cart.map((el) => {
         if (el.id === id) return { ...el, quantity: el.quantity + 1 };
         return el;
       });
 
       setCart(cartUpdate);
-    } else setCart((prevCart) => [...prevCart, item]);
+    } else setCart([...cart, item]);
 
     openCart();
   };
 
-  const updateQuantity = (op, id) => {
+  const updateQuantity = (op: string, id: string) => {
     let cartUpdate;
     const item = cart.find((item) => item.id === id);
 
-    if (item.quantity == 1 && op === "-")
+    if (item && item.quantity == 1 && op === "-")
       cartUpdate = cart.filter((item) => item.id !== id);
     else
       cartUpdate = cart.map((el) => {
@@ -74,7 +79,9 @@ function App() {
     setCart(cartUpdate);
   };
 
-  const sortItems = (sorting) => {
+  const sortItems = (
+    sorting: "sortDefault" | "sortPriceLtoH" | "sortPriceHtoL"
+  ) => {
     setSelectValue(sorting);
 
     sorting === "sortDefault"
@@ -104,38 +111,42 @@ function App() {
     });
   };
 
-  const updateFilters = (e) => {
-    const param = e.target.name;
-    const val = e.target.value;
+  const updateFilters = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const param = e.target.name as keyof Filters;
+    const val = e.target.value as keyof Filters[typeof param];
 
-    setFilters((prevFilters) => {
-      return {
-        ...prevFilters,
-        [param]: {
-          ...prevFilters[param],
-          [val]: !prevFilters[param][val],
-        },
-      };
-    });
+    const filtersUpdate = {
+      ...filters,
+      [param]: {
+        ...filters[param],
+        [val]: !filters[param][val],
+      },
+    };
+
+    setFilters(filtersUpdate);
   };
 
   const collectFilters = () => {
+    interface AppliedFilters {
+      [key: string]: string[];
+    }
+
     const { gender, brand, price } = filters;
-    const appliedFilters = {
+    const appliedFilters: AppliedFilters = {
       gender: [],
       brand: [],
       price: [],
     };
 
-    for (let genderKey in gender) {
+    for (const genderKey in gender) {
       if (gender[genderKey]) appliedFilters.gender.push(genderKey);
     }
 
-    for (let brandKey in brand) {
+    for (const brandKey in brand) {
       if (brand[brandKey]) appliedFilters.brand.push(brandKey);
     }
 
-    for (let priceKey in price) {
+    for (const priceKey in price) {
       if (price[priceKey]) appliedFilters.price.push(priceKey);
     }
 
@@ -158,7 +169,7 @@ function App() {
               return product[key] > 25 && product[key] <= 30;
           });
         }
-        return filters[key].includes(product[key]);
+        return filters[key].includes(product[key as keyof typeof product]);
       });
     });
 
@@ -193,7 +204,7 @@ function App() {
   };
 
   return (
-    <Wrapper bgImg={location === ""}>
+    <Wrapper $bgImg={location === ""}>
       <Nav cart={cart} openCart={openCart} location={location} />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -229,12 +240,12 @@ function App() {
   );
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ $bgImg?: boolean }>`
   min-height: 100vh;
   background: transparent;
 
   ${(props) =>
-    props.bgImg &&
+    props.$bgImg &&
     css`
       background: url(${bg}) no-repeat center center fixed;
       background-size: cover;

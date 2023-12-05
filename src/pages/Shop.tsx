@@ -1,20 +1,32 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import ItemCard from "../components/ItemCard";
+import { Item } from "../typings/sharedTypes";
+import { Filters } from "../typings/sharedTypes";
 
-function Shop(props) {
-  const {
-    loadItems,
-    sortItems,
-    items,
-    addToCart,
-    filters,
-    updateFilters,
-    resetFilters,
-    selectValue,
-  } = props;
+interface ShopProps {
+  loadItems: () => void;
+  sortItems: (
+    sorting: "sortDefault" | "sortPriceLtoH" | "sortPriceHtoL"
+  ) => void;
+  items: Item[];
+  addToCart: (id: string) => void;
+  filters: Filters;
+  updateFilters: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  resetFilters: () => void;
+  selectValue: string;
+}
 
+const Shop: React.FC<ShopProps> = ({
+  loadItems,
+  sortItems,
+  items,
+  addToCart,
+  filters,
+  updateFilters,
+  resetFilters,
+  selectValue,
+}) => {
   useEffect(() => {
     loadItems();
     resetFilters();
@@ -26,8 +38,13 @@ function Shop(props) {
         <p>Sort</p>
         <StyledSelect
           value={selectValue}
-          onChange={(e) => {
-            sortItems(e.target.value);
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+            sortItems(
+              e.target.value as
+                | "sortDefault"
+                | "sortPriceLtoH"
+                | "sortPriceHtoL"
+            );
           }}
         >
           <option value="sortDefault">default sorting</option>
@@ -156,7 +173,7 @@ function Shop(props) {
       </ItemsFiltersWrapper>
     </>
   );
-}
+};
 
 const SorterWrapper = styled.div`
   display: flex;
@@ -212,16 +229,5 @@ const ItemsGrid = styled.div`
 const StyledP = styled.p`
   text-align: center;
 `;
-
-Shop.propTypes = {
-  items: PropTypes.array,
-  loadItems: PropTypes.func,
-  sortItems: PropTypes.func,
-  addToCart: PropTypes.func,
-  filters: PropTypes.object,
-  updateFilters: PropTypes.func,
-  resetFilters: PropTypes.func,
-  selectValue: PropTypes.string,
-};
 
 export default Shop;

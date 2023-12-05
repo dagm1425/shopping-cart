@@ -1,12 +1,25 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { IconContext } from "react-icons";
 
-function CartItem(props) {
-  const { id, title, quantity, img, price, updateQuantity } = props;
+interface CartItemProps {
+  id: string;
+  title: string;
+  quantity: number;
+  img: string;
+  price: number;
+  updateQuantity: (op: string, id: string) => void;
+}
 
+const CartItem: React.FC<CartItemProps> = ({
+  id,
+  title,
+  quantity,
+  img,
+  price,
+  updateQuantity,
+}) => {
   return (
     <ItemWrapper>
       <ImgWrapper>
@@ -39,7 +52,7 @@ function CartItem(props) {
       </DetailWrapper>
     </ItemWrapper>
   );
-}
+};
 
 const ItemWrapper = styled.div`
   display: flex;
@@ -91,14 +104,5 @@ const QtyBtn = styled.button`
   background: transparent;
   cursor: pointer;
 `;
-
-CartItem.propTypes = {
-  id: PropTypes.string,
-  title: PropTypes.string,
-  quantity: PropTypes.number,
-  img: PropTypes.string,
-  price: PropTypes.number,
-  updateQuantity: PropTypes.func,
-};
 
 export default CartItem;
