@@ -12,7 +12,7 @@ interface CartProps {
   totalPrice: number;
   updateQuantity: (op: string, id: string) => void;
   isCartOpen: boolean;
-  closeCart: () => void;
+  toggleCart: () => void;
 }
 
 const Cart: React.FC<CartProps> = ({
@@ -20,7 +20,7 @@ const Cart: React.FC<CartProps> = ({
   totalPrice,
   updateQuantity,
   isCartOpen,
-  closeCart,
+  toggleCart,
 }) => {
   const cartItems = cart.map((item) => (
     <CartItem
@@ -39,7 +39,7 @@ const Cart: React.FC<CartProps> = ({
       <CartWrapper $active={isCartOpen}>
         <CartHeader>
           <HeaderH3>Shopping Cart</HeaderH3>
-          <CloseBtn onClick={closeCart}>
+          <CloseBtn onClick={toggleCart}>
             <IconContext.Provider
               value={{
                 style: { fontSize: "26px", color: "#000" },
@@ -76,13 +76,13 @@ const Cart: React.FC<CartProps> = ({
               <AiOutlineShopping />
             </IconContext.Provider>
             <StyledLink to="/shop">
-              <MainBtn onClick={closeCart}>Browse items</MainBtn>
+              <MainBtn onClick={toggleCart}>Browse items</MainBtn>
             </StyledLink>
           </EmptyCartWrapper>
         )}
       </CartWrapper>
 
-      <Overlay $active={isCartOpen} onClick={closeCart} />
+      <Overlay $active={isCartOpen} onClick={toggleCart} />
     </>
   );
 };

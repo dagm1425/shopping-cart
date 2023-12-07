@@ -7,11 +7,11 @@ import { Item } from "src/typings/sharedTypes";
 
 interface NavProps {
   cart: Item[];
-  openCart: () => void;
+  toggleCart: () => void;
   location: string;
 }
 
-const Nav: React.FC<NavProps> = ({ cart, openCart, location }) => {
+const Nav: React.FC<NavProps> = ({ cart, toggleCart, location }) => {
   return (
     <Wrapper $navbg={location !== ""}>
       <StyledLink $fullwidth={true} to="/">
@@ -21,7 +21,7 @@ const Nav: React.FC<NavProps> = ({ cart, openCart, location }) => {
         <StyledLink to="/shop">
           <Li>Shop</Li>
         </StyledLink>
-        <Cart onClick={openCart}>
+        <Cart onClick={toggleCart}>
           <IconContext.Provider
             value={{
               style: { fontSize: "35px", color: "#fff" },

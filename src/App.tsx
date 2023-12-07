@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import products from "./data/allProducts";
 import Nav from "./components/Nav";
@@ -8,122 +8,87 @@ import Shop from "./pages/Shop";
 import ItemDetail from "./pages/ItemDetail";
 import bg from "./data/images/bg_main.jpg";
 import styled, { css } from "styled-components";
-import { Item } from "./typings/sharedTypes";
 import { Filters } from "./typings/sharedTypes";
+import { useAppContext } from "./context/context";
 
 function App() {
-  const [items, setItems] = useState<Item[]>([]);
-  const [cart, setCart] = useState<Item[]>([]);
-  const [filters, setFilters] = useState<Filters>({
-    gender: { man: false, woman: false },
-    brand: { Hanes: false, Champion: false, Under_Armour: false },
-    price: { upTo20: false, from20To25: false, from25To30: false },
-  });
-  const [totalPrice, setTotalPrice] = useState<number>(0);
-  const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
-  const [selectValue, setSelectValue] = useState<
-    "sortDefault" | "sortPriceLtoH" | "sortPriceHtoL"
-  >("sortDefault");
+  const { state, dispatch } = useAppContext();
+  const items = state.items;
+  const cart = state.cart.items;
+  const isCartOpen = state.cart.isCartOpen;
+  const totalPrice = state.cart.totalPrice;
+  const sorting = state.sorting;
+  const filters = state.filters;
   const path = useLocation().pathname;
   const location = path.split("/")[1];
 
   useEffect(() => {
-    setTotalPrice(computeTotalPrice());
+    dispatch({ type: "CALCULATE_TOTAL_PRICE" });
   }, [cart]);
 
   useEffect(() => {
     filterItems();
   }, [filters]);
 
-  const loadItems = () => {
-    setItems(products);
-  };
-
-  const computeTotalPrice = () => {
-    return cart.reduce((total, el) => total + el.price * el.quantity, 0);
-  };
-
-  const addToCart = (id: string) => {
-    const item = items.find((item) => item.id === id);
-
-    if (!item) return;
-
-    if (cart.some((el) => el.id === id)) {
-      const cartUpdate = cart.map((el) => {
-        if (el.id === id) return { ...el, quantity: el.quantity + 1 };
-        return el;
-      });
-
-      setCart(cartUpdate);
-    } else setCart([...cart, item]);
-
-    openCart();
-  };
-
-  const updateQuantity = (op: string, id: string) => {
-    let cartUpdate;
-    const item = cart.find((item) => item.id === id);
-
-    if (item && item.quantity == 1 && op === "-")
-      cartUpdate = cart.filter((item) => item.id !== id);
-    else
-      cartUpdate = cart.map((el) => {
-        if (el.id === id) {
-          return op === "-"
-            ? { ...el, quantity: el.quantity - 1 }
-            : { ...el, quantity: el.quantity + 1 };
-        }
-        return el;
-      });
-
-    setCart(cartUpdate);
-  };
-
-  const sortItems = (
-    sorting: "sortDefault" | "sortPriceLtoH" | "sortPriceHtoL"
-  ) => {
-    setSelectValue(sorting);
-
+  useEffect(() => {
     sorting === "sortDefault"
       ? sortDefault()
       : sorting === "sortPriceLtoH"
       ? sortPriceLtoH()
       : sortPriceHtoL();
+  }, [sorting]);
+
+  const loadItems = () => {
+    if (items.length) return;
+    dispatch({ type: "SET_ITEMS", payload: products });
+  };
+
+  const addToCart = (id: string) => {
+    const item = items.find((item) => item.id === id);
+    if (!item) return;
+
+    dispatch({ type: "ADD_TO_CART", payload: item });
+    toggleCart();
+  };
+
+  const updateQuantity = (operator: string, id: string) => {
+    dispatch({ type: "UPDATE_QUANTITY", payload: { operator, id } });
+  };
+
+  const sortItems = (
+    sorting: "sortDefault" | "sortPriceLtoH" | "sortPriceHtoL"
+  ) => {
+    dispatch({ type: "SET_SORTING", payload: sorting });
   };
 
   const sortDefault = () => {
-    setItems((prevItems) =>
-      prevItems.slice().sort((a, b) => {
-        return products.indexOf(a) - products.indexOf(b);
-      })
-    );
+    const sortedItems = items
+      .slice()
+      .sort((a, b) => products.indexOf(a) - products.indexOf(b));
+    dispatch({ type: "SET_ITEMS", payload: sortedItems });
   };
 
   const sortPriceLtoH = () => {
-    setItems((prevItems) => {
-      return prevItems.slice().sort((a, b) => a.price - b.price);
-    });
+    const sortedItems = items.slice().sort((a, b) => a.price - b.price);
+    dispatch({ type: "SET_ITEMS", payload: sortedItems });
   };
 
   const sortPriceHtoL = () => {
-    setItems((prevItems) => {
-      return prevItems.slice().sort((a, b) => b.price - a.price);
-    });
+    const sortedItems = items.slice().sort((a, b) => b.price - a.price);
+    dispatch({ type: "SET_ITEMS", payload: sortedItems });
   };
 
   const updateFilters = (e: React.ChangeEvent<HTMLInputElement>) => {
     const param = e.target.name as keyof Filters;
-    const val = e.target.value as keyof Filters[typeof param];
+    const val = e.target.value as string;
 
-    const filtersUpdate = {
-      ...filters,
-      [param]: {
-        ...filters[param],
-        [val]: !filters[param][val],
+    dispatch({
+      type: "TOGGLE_FILTER",
+      payload: {
+        param,
+        val,
       },
-    };
-
-    setFilters(filtersUpdate);
+    });
   };
 
   const collectFilters = () => {
@@ -173,39 +138,21 @@ function App() {
       });
     });
 
-    setItems(filteredItems);
-    setSelectValue("sortDefault");
+    dispatch({ type: "SET_ITEMS", payload: filteredItems });
+    dispatch({ type: "SET_SORTING", payload: "sortDefault" });
   };
 
   const resetFilters = () => {
-    const { gender, brand, price } = filters;
-
-    Object.keys(gender).forEach((key) => {
-      gender[key] = false;
-    });
-
-    Object.keys(brand).forEach((key) => {
-      brand[key] = false;
-    });
-
-    Object.keys(price).forEach((key) => {
-      price[key] = false;
-    });
-
-    setFilters({ gender, brand, price });
+    dispatch({ type: "RESET_FILTERS" });
   };
 
-  const openCart = () => {
-    setIsCartOpen(true);
-  };
-
-  const closeCart = () => {
-    setIsCartOpen(false);
+  const toggleCart = () => {
+    dispatch({ type: "TOGGLE_CART" });
   };
 
   return (
     <Wrapper $bgImg={location === ""}>
-      <Nav cart={cart} openCart={openCart} location={location} />
+      <Nav cart={cart} toggleCart={toggleCart} location={location} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -219,7 +166,7 @@ function App() {
               filters={filters}
               updateFilters={updateFilters}
               resetFilters={resetFilters}
-              selectValue={selectValue}
+              sorting={sorting}
             />
           }
         />
@@ -234,7 +181,7 @@ function App() {
         totalPrice={totalPrice}
         updateQuantity={updateQuantity}
         isCartOpen={isCartOpen}
-        closeCart={closeCart}
+        toggleCart={toggleCart}
       />
     </Wrapper>
   );

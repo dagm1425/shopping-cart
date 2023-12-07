@@ -14,7 +14,7 @@ interface ShopProps {
   filters: Filters;
   updateFilters: (e: React.ChangeEvent<HTMLInputElement>) => void;
   resetFilters: () => void;
-  selectValue: string;
+  sorting: string;
 }
 
 const Shop: React.FC<ShopProps> = ({
@@ -25,7 +25,7 @@ const Shop: React.FC<ShopProps> = ({
   filters,
   updateFilters,
   resetFilters,
-  selectValue,
+  sorting,
 }) => {
   useEffect(() => {
     loadItems();
@@ -37,7 +37,7 @@ const Shop: React.FC<ShopProps> = ({
       <SorterWrapper>
         <p>Sort</p>
         <StyledSelect
-          value={selectValue}
+          value={sorting}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
             sortItems(
               e.target.value as

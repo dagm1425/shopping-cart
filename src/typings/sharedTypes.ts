@@ -15,3 +15,5 @@ export interface Filters {
   brand: { [key: string]: boolean };
   price: { [key: string]: boolean };
 }
+
+export type Sorting = "sortDefault" | "sortPriceLtoH" | "sortPriceHtoL";
