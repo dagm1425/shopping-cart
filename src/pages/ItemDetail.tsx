@@ -92,8 +92,7 @@ const ItemDetail: React.FC<ItemDetailProps> = ({ items, addToCart }) => {
             <TitleH2>{item.title}</TitleH2>
             <ItemDescription>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore. Ut
-              enim ad minim.
+              eiusmod tempor incididunt ut labore et dolore. Ut enim ad minim.
             </ItemDescription>
             <StarsWrapper>
               <ReactStars
