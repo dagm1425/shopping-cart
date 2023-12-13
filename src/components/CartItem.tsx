@@ -23,7 +23,7 @@ const CartItem: React.FC<CartItemProps> = ({
   return (
     <ItemWrapper>
       <ImgWrapper>
-        <Img src={img} alt="item-img" />
+        <Img src={img} alt={title} />
       </ImgWrapper>
       <DetailWrapper>
         <TitleP>{title}</TitleP>
@@ -57,16 +57,16 @@ const CartItem: React.FC<CartItemProps> = ({
 const ItemWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  width: 90%;
+  gap: 1rem;
+  width: 85%;
   margin: 0 auto;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid #b0b0b0;
 `;
 
 const ImgWrapper = styled.div`
-  height: 110px;
-  width: 110px;
+  height: 90px;
+  width: 90px;
   background-color: #fff;
 `;
 
@@ -81,7 +81,7 @@ const DetailWrapper = styled.div`
 `;
 
 const TitleP = styled.p`
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 `;
 
 const PriceP = styled.p`
@@ -95,7 +95,8 @@ const QtyController = styled.div`
   align-items: center;
   gap: 8px;
   padding: 4px;
-  border: 0.75px solid #000;
+  border: 0.75px solid #a6a6a6;
+  border-radius: 5px;
 `;
 
 const QtyBtn = styled.button`

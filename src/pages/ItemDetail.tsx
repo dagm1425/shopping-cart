@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import ReactImageMagnify, {
   ReactImageMagnifyProps,
   SmallImageType,
@@ -25,7 +25,7 @@ interface ItemDetailProps {
 
 const MyImageMagnifyComponent: React.FC<ImageMagnifyProps> = ({ img }) => {
   const magnifyProps: CustomImageMagnifyProps = {
-    style: { zIndex: 10 },
+    style: { zIndex: 1 },
     smallImage: {
       alt: "",
       src: img,
@@ -90,14 +90,19 @@ const ItemDetail: React.FC<ItemDetailProps> = ({ items, addToCart }) => {
                 : item.brand}
             </p>
             <TitleH2>{item.title}</TitleH2>
+            <ItemDescription>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore. Ut
+              enim ad minim.
+            </ItemDescription>
             <StarsWrapper>
               <ReactStars
                 value={item.rating}
                 count={5}
-                size={24}
+                size={18}
                 isHalf={true}
                 edit={false}
-                activeColor="#faaf00"
+                activeColor="#000"
                 style={{ zIndex: "-1" }}
               />
               <span>{item.rating}</span>
@@ -116,7 +121,7 @@ const ItemDetail: React.FC<ItemDetailProps> = ({ items, addToCart }) => {
 const Wrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 8rem 0;
+  padding: 4rem 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 `;
@@ -148,14 +153,9 @@ const LeftDiv2 = styled.div`
 const ImgWrapper = styled.div<{ $active?: boolean }>`
   width: 80px;
   height: 80px;
-  border: 1px, solid #eee;
+  border: ${(props) =>
+    props.$active ? "2px solid #e77600" : "1px, solid #eee"};
   cursor: pointer;
-
-  ${(props) =>
-    props.$active &&
-    css`
-      border: 2px solid #e77600;
-    `}
 `;
 
 const SliderImg = styled.img`
@@ -166,6 +166,7 @@ const SliderImg = styled.img`
 `;
 
 const RightDiv = styled.div`
+  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -179,11 +180,17 @@ const TitleH2 = styled.h2`
 const StarsWrapper = styled.div`
   display: flex;
   align-items: center;
-  column-gap: 6px;
+  gap: 6px;
+`;
+
+const ItemDescription = styled.p`
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 0.5rem;
 `;
 
 const AddToCartBtn = styled.button`
-  width: 40%;
+  width: 70%;
   background-color: #ffd814;
   border: none;
   border-radius: 25px;

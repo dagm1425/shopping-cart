@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ItemCard from "../components/ItemCard";
 import { Item } from "../typings/sharedTypes";
 import { Filters } from "../typings/sharedTypes";
+import { IoIosArrowDown } from "react-icons/io";
 
 interface ShopProps {
-  loadItems: () => void;
   sortItems: (
     sorting: "sortDefault" | "sortPriceLtoH" | "sortPriceHtoL"
   ) => void;
@@ -18,7 +18,7 @@ interface ShopProps {
 }
 
 const Shop: React.FC<ShopProps> = ({
-  loadItems,
+loadItems,
   sortItems,
   items,
   addToCart,
@@ -27,6 +27,12 @@ const Shop: React.FC<ShopProps> = ({
   resetFilters,
   sorting,
 }) => {
+  const [collapsedFilters, setCollapsedFilters] = useState({
+    gender: true,
+    brand: true,
+    price: true,
+  });
+
   useEffect(() => {
     loadItems();
     resetFilters();
@@ -55,102 +61,144 @@ const Shop: React.FC<ShopProps> = ({
       <ItemsFiltersWrapper>
         <FilterWrapper>
           <FilterGroup>
-            <p>Sportswear for</p>
-            <div>
-              <input
-                type="checkbox"
-                id="gender1"
-                name="gender"
-                value="man"
-                checked={filters.gender.man}
-                onChange={(e) => updateFilters(e)}
-              />
-              <label htmlFor="gender1"> Men</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="gender2"
-                name="gender"
-                value="woman"
-                checked={filters.gender.woman}
-                onChange={(e) => updateFilters(e)}
-              />
-              <label htmlFor="gender2"> Women</label>
-            </div>
+            <FilterHeader
+              $collapsed={collapsedFilters.gender}
+              onClick={() =>
+                setCollapsedFilters((prevState) => ({
+                  ...prevState,
+                  gender: !prevState.gender,
+                }))
+              }
+            >
+              <p>Sportswear for</p>
+              <IoIosArrowDown />
+            </FilterHeader>
+            <StyledHr />
+            <FiltersInnerWrapper $collapsed={collapsedFilters.gender}>
+              <div>
+                <input
+                  type="checkbox"
+                  id="gender1"
+                  name="gender"
+                  value="man"
+                  checked={filters.gender.man}
+                  onChange={(e) => updateFilters(e)}
+                />
+                <label htmlFor="gender1"> Men</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  id="gender2"
+                  name="gender"
+                  value="woman"
+                  checked={filters.gender.woman}
+                  onChange={(e) => updateFilters(e)}
+                />
+                <label htmlFor="gender2"> Women</label>
+              </div>
+            </FiltersInnerWrapper>
           </FilterGroup>
 
           <FilterGroup>
-            <p>Brand</p>
-            <div>
-              <input
-                type="checkbox"
-                id="brand1"
-                name="brand"
-                value="Hanes"
-                checked={filters.brand.Hanes}
-                onChange={(e) => updateFilters(e)}
-              />
-              <label htmlFor="brand1"> Hanes</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="brand2"
-                name="brand"
-                value="Champion"
-                checked={filters.brand.Champion}
-                onChange={(e) => updateFilters(e)}
-              />
-              <label htmlFor="brand2"> Champion</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="brand3"
-                name="brand"
-                value="Under_Armour"
-                checked={filters.brand.Under_Armour}
-                onChange={(e) => updateFilters(e)}
-              />
-              <label htmlFor="brand3"> Under Armour</label>
-            </div>
+            <FilterHeader
+              $collapsed={collapsedFilters.brand}
+              onClick={() =>
+                setCollapsedFilters((prevState) => ({
+                  ...prevState,
+                  brand: !prevState.brand,
+                }))
+              }
+            >
+              <p>Brand</p>
+              <IoIosArrowDown />
+            </FilterHeader>
+            <StyledHr />
+            <FiltersInnerWrapper $collapsed={collapsedFilters.brand}>
+              <div>
+                <input
+                  type="checkbox"
+                  id="brand1"
+                  name="brand"
+                  value="Hanes"
+                  checked={filters.brand.Hanes}
+                  onChange={(e) => updateFilters(e)}
+                />
+                <label htmlFor="brand1"> Hanes</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  id="brand2"
+                  name="brand"
+                  value="Champion"
+                  checked={filters.brand.Champion}
+                  onChange={(e) => updateFilters(e)}
+                />
+                <label htmlFor="brand2"> Champion</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  id="brand3"
+                  name="brand"
+                  value="Under_Armour"
+                  checked={filters.brand.Under_Armour}
+                  onChange={(e) => updateFilters(e)}
+                />
+                <label htmlFor="brand3"> Under Armour</label>
+              </div>
+            </FiltersInnerWrapper>
           </FilterGroup>
           <FilterGroup>
-            <p>Price</p>
-            <div>
-              <input
-                type="checkbox"
-                id="price1"
-                name="price"
-                value="upTo20"
-                checked={filters.price.upTo20}
-                onChange={(e) => updateFilters(e)}
-              />
-              <label htmlFor="price1"> Up to $20</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="price2"
-                name="price"
-                value="from20To25"
-                checked={filters.price.from20To25}
-                onChange={(e) => updateFilters(e)}
-              />
-              <label htmlFor="price2"> $20 to $25</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="price3"
-                name="price"
-                value="from25To30"
-                checked={filters.price.from25To30}
-                onChange={(e) => updateFilters(e)}
-              />
-              <label htmlFor="price3"> $25 to $30</label>
-            </div>
+            <FilterHeader
+              $collapsed={collapsedFilters.price}
+              onClick={() =>
+                setCollapsedFilters((prevState) => ({
+                  ...prevState,
+                  price: !prevState.price,
+                }))
+              }
+            >
+              <p>Price</p>
+              <IoIosArrowDown />
+            </FilterHeader>
+            <StyledHr />
+            <FiltersInnerWrapper $collapsed={collapsedFilters.price}>
+              <div>
+                <input
+                  type="checkbox"
+                  id="price1"
+                  name="price"
+                  value="upTo20"
+                  checked={filters.price.upTo20}
+                  onChange={(e) => updateFilters(e)}
+                />
+                <label htmlFor="price1"> Up to $20</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  id="price2"
+                  name="price"
+                  value="from20To25"
+                  checked={filters.price.from20To25}
+                  onChange={(e) => updateFilters(e)}
+                />
+                <label htmlFor="price2"> $20 to $25</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  id="price3"
+                  name="price"
+                  value="from25To30"
+                  checked={filters.price.from25To30}
+                  onChange={(e) => updateFilters(e)}
+                />
+                <label htmlFor="price3"> $25 to $30</label>
+              </div>
+            </FiltersInnerWrapper>
           </FilterGroup>
         </FilterWrapper>
         {items.length > 0 ? (
@@ -197,33 +245,61 @@ const StyledSelect = styled.select`
 
 const ItemsFiltersWrapper = styled.div`
   display: flex;
-  padding: 4rem 6rem 2rem;
+  padding: 2rem 4.5rem 2rem;
 `;
 
 const FilterWrapper = styled.div`
-  width: 15%;
+  width: 18%;
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
   font-size: 14px;
+  padding-right: 1.25rem;
+  padding-top: 1.25rem;
 `;
 
 const FilterGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
 
   & p {
     font-weight: 700;
-    margin-bottom: 4px;
   }
+`;
+
+const FilterHeader = styled.div<{ $collapsed: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+
+  & svg {
+    transition: transform 0.3s ease-in-out;
+    transform: ${({ $collapsed }) =>
+      $collapsed ? "rotate(180deg)" : "rotate(0)"};
+  }
+`;
+
+const FiltersInnerWrapper = styled.div<{ $collapsed: boolean }>`
+  max-height: ${({ $collapsed }) => ($collapsed ? "200px" : "0")};
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+
+  & div {
+    margin-bottom: 0.375rem;
+  }
+`;
+
+const StyledHr = styled.hr`
+  margin: 0.625rem 0;
+  opacity: 0.6;
 `;
 
 const ItemsGrid = styled.div`
   display: grid;
-  width: 85%;
+  width: 82%;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 `;
 
 const StyledP = styled.p`

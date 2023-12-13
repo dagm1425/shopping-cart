@@ -21,7 +21,7 @@ import uniqid from "uniqid";
 const products = [
   {
     id: uniqid(),
-    title: "Hanes Sport Women's Performance Fleece Full Zip Hoodie",
+    title: "Hanes Sport Women's Performance Hoodie",
     brand: "Hanes",
     img: hanesHoodie,
     gallery: [hanesHoodie, hanesHoodie1],
@@ -76,8 +76,7 @@ const products = [
   },
   {
     id: uniqid(),
-    title:
-      "Hanes Sport Men's Long-Sleeve T-Shirt Pack, Cool DRI Moisture-Wicking Performance T-Shirts, Performance Tee",
+    title: "Hanes Sport Men's Long-Sleeve T-Shirt Pack, Performance Tee",
     brand: "Hanes",
     img: hanesActiveShirtM,
     gallery: [hanesActiveShirtM, hanesActiveShirtM1],

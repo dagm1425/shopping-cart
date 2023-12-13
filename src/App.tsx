@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import ItemDetail from "./pages/ItemDetail";
 import bg from "./data/images/bg_main.jpg";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Filters } from "./typings/sharedTypes";
 import { useAppContext } from "./context/context";
 
@@ -189,14 +189,9 @@ function App() {
 
 const Wrapper = styled.div<{ $bgImg?: boolean }>`
   min-height: 100vh;
-  background: transparent;
-
-  ${(props) =>
-    props.$bgImg &&
-    css`
-      background: url(${bg}) no-repeat center center fixed;
-      background-size: cover;
-    `}
+  background: ${({ $bgImg }) =>
+    $bgImg ? `url(${bg}) no-repeat center center fixed` : "transparent"};
+  background-size: ${({ $bgImg }) => ($bgImg ? "cover" : "auto")};
 `;
 
 export default App;

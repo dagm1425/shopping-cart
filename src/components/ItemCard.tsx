@@ -23,16 +23,16 @@ const ItemCard: React.FC<ItemCardProps> = ({
   return (
     <Card>
       <StyledLink to={`/shop/${id}`}>
-        <Img src={img} alt="item-img" />
+        <Img src={img} alt={title} loading="lazy" />
         <TitleP>{title}</TitleP>
         <StarsWrapper>
           <ReactStars
             value={rating}
             count={5}
-            size={20}
+            size={16}
             isHalf={true}
             edit={false}
-            activeColor="#faaf00"
+            activeColor="#000"
             style={{ zIndex: "-1" }}
           />
           <span>{rating}</span>
@@ -66,7 +66,7 @@ const TitleP = styled.p`
 const PriceP = styled.p`
   font-size: 1.15rem;
   font-weight: 700;
-  margin-top: 1.25rem;
+  margin-top: 1rem;
 `;
 
 const StarsWrapper = styled.div`
@@ -77,9 +77,10 @@ const StarsWrapper = styled.div`
 `;
 
 const Card = styled.div`
-  height: 485px;
+  height: 60vh;
   outline: none;
   border: 2px solid #fff;
+  border-bottom: none;
   border-radius: 6px;
   transition: border-color 100ms ease-in;
 
@@ -101,11 +102,11 @@ const Img = styled.img`
 
 const AddToCartBtn = styled.button`
   visibility: hidden;
+  width: 100%;
+  height: 9%;
   opacity: 0;
   outline: none;
   border: none;
-  width: 100%;
-  height: 9%;
   padding: 0 1.125rem;
   background-color: #ffd814;
   border: none;

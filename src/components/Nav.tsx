@@ -1,20 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { AiOutlineShopping } from "react-icons/ai";
 import { IconContext } from "react-icons";
 import { Item } from "src/typings/sharedTypes";
 
 interface NavProps {
   cart: Item[];
-  toggleCart: () => void;
+    toggleCart: () => void;
   location: string;
 }
 
 const Nav: React.FC<NavProps> = ({ cart, toggleCart, location }) => {
   return (
     <Wrapper $navbg={location !== ""}>
-      <StyledLink $fullwidth={true} to="/">
+      <StyledLink to="/">
         <BrandName>athletic outfitters</BrandName>
       </StyledLink>
       <Div>
@@ -36,59 +36,38 @@ const Nav: React.FC<NavProps> = ({ cart, toggleCart, location }) => {
   );
 };
 
-const StyledLink = styled(Link)<{ $fullwidth?: boolean }>`
+const StyledLink = styled(Link)`
   text-decoration: none;
   color: inherit;
 
-  ${(props) =>
-    props.$fullwidth &&
-    css`
-      width: 100%;
-    `}
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
-const Li = styled.p`
-  position: relative;
+const SearchLink = styled.a`
+  display: flex;
+  align-items: center;
+  gap: 0.325rem;
+  cursor: pointer;
 
-  &:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -4px;
-    height: 2px;
-    background-color: #fff;
-    transform: scaleX(0);
-    transition: 200ms ease-in-out;
-  }
-
-  &:hover:before,
-  &:hover:before {
-    transform: scaleX(1);
+  &:hover {
+    opacity: 0.8;
   }
 `;
 
 const Wrapper = styled.nav<{ $navbg?: boolean }>`
-  color: #fff;
-  display: flex;
-  min-height: 8vh;
   width: 100%;
-  margin: 0 auto;
-  justify-content: space-between;
+  min-height: 9vh;
+  display: flex;
+  justify-content: space-around;
   align-items: center;
-  background-color: transparent;
+  color: #fff;
+  background-color: ${({ $navbg }) => ($navbg ? "#232f3e" : "transparent")};
   text-decoration: none;
-
-  ${(props) =>
-    props.$navbg &&
-    css`
-      background-color: #232f3e;
-    `}
 `;
 
 const BrandName = styled.p`
-  width: 30%;
-  text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.15rem;
   height: 35px;
@@ -97,10 +76,14 @@ const BrandName = styled.p`
 
 const Div = styled.div`
   display: flex;
-  width: 30%;
   align-items: center;
   justify-content: space-around;
+  gap: 4rem;
   list-style-type: none;
+
+  @media (max-width: 575px) {
+    gap: 1.5rem;
+  }
 `;
 
 const Cart = styled.button`
@@ -113,18 +96,19 @@ const Cart = styled.button`
   position: relative;
 `;
 
-const CartIndex = styled.span`
+const CartIndex = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 1.375rem;
-  height: 1.375rem;
+  width: 22px;
+  height: 22px;
+  font-size: 12px;
   font-weight: 800;
   color: #ffd814;
-  background-color: #232f3e;
-  padding: 2px;
+  background: #232f3e;
   border: 2px solid #fff;
   border-radius: 50%;
+  text-align: center;
 `;
 
 export default Nav;

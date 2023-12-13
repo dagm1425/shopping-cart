@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 import CartItem from "./CartItem";
 import { AiOutlineClose } from "react-icons/ai";
@@ -38,7 +38,7 @@ const Cart: React.FC<CartProps> = ({
     <>
       <CartWrapper $active={isCartOpen}>
         <CartHeader>
-          <HeaderH3>Shopping Cart</HeaderH3>
+          <h3>Cart</h3>
           <CloseBtn onClick={toggleCart}>
             <IconContext.Provider
               value={{
@@ -88,42 +88,30 @@ const Cart: React.FC<CartProps> = ({
 };
 
 const CartWrapper = styled.div<{ $active?: boolean }>`
-  background-color: #f7f7f7;
   position: fixed;
-  transform: translateX(100%);
-  transition: 200ms ease-in-out;
   width: 35%;
   height: 100vh;
   top: 0;
   right: 0;
+  background-color: #f7f7f7;
+  transform: ${({ $active }) =>
+    $active ? "translateX(0%)" : "translateX(100%)"};
+  transition: 200ms ease-in-out;
   z-index: 30;
-  overflow-y: scroll;
-
-  ${(props) =>
-    props.$active &&
-    css`
-      transform: translateX(0%);
-    `}
+  overflow-y: auto;
 `;
 
 const Overlay = styled.div<{ $active?: boolean }>`
   position: fixed;
-  opacity: 0;
-  transition: 200ms ease-in-out;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  opacity: ${({ $active }) => ($active ? "1" : "0")};
+  transition: 200ms ease-in-out;
   background-color: rgba(0, 0, 0, 0.5);
-  pointer-events: none;
+  pointer-events: ${({ $active }) => ($active ? "all" : "none")};
   z-index: 10;
-
-  ${(props) =>
-    props.$active &&
-    css`
-      opacity: 1;
-      pointer-events: all;
-    `}
 `;
 
 const CartHeader = styled.div`
@@ -133,10 +121,10 @@ const CartHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
 
-const HeaderH3 = styled.h3`
-  line-height: 100%;
+  & svg {
+    margin-top: 6px;
+  }
 `;
 
 const CloseBtn = styled.button`
