@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer } from "react";
 import { rootReducer, State, Action } from "./reducers";
+import products from "src/data/allProducts";
 
 interface AppContextProps {
   state: State;
@@ -9,7 +10,7 @@ interface AppContextProps {
 const AppContext = createContext<AppContextProps | null>(null);
 
 const initialState: State = {
-  items: [],
+  items: products,
   filters: {
     gender: { man: false, woman: false },
     brand: { Hanes: false, Champion: false, Under_Armour: false },

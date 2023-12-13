@@ -18,7 +18,6 @@ interface ShopProps {
 }
 
 const Shop: React.FC<ShopProps> = ({
-loadItems,
   sortItems,
   items,
   addToCart,
@@ -34,7 +33,6 @@ loadItems,
   });
 
   useEffect(() => {
-    loadItems();
     resetFilters();
   }, []);
 

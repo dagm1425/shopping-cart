@@ -38,11 +38,6 @@ function App() {
       : sortPriceHtoL();
   }, [sorting]);
 
-  const loadItems = () => {
-    if (items.length) return;
-    dispatch({ type: "SET_ITEMS", payload: products });
-  };
-
   const addToCart = (id: string) => {
     const item = items.find((item) => item.id === id);
     if (!item) return;
@@ -159,7 +154,6 @@ function App() {
           path="/shop"
           element={
             <Shop
-              loadItems={loadItems}
               sortItems={sortItems}
               items={items}
               addToCart={addToCart}
