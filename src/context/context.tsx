@@ -22,6 +22,11 @@ const initialState: State = {
     isCartOpen: false,
   },
   sorting: "sortDefault",
+  search: {
+    isSearchBarOpen: false,
+    search: "",
+    searchResults: [],
+  },
 };
 
 const useAppContext = () => {

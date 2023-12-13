@@ -3,24 +3,33 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { AiOutlineShopping } from "react-icons/ai";
 import { IconContext } from "react-icons";
+import { IoSearchSharp } from "react-icons/io5";
 import { Item } from "src/typings/sharedTypes";
 
 interface NavProps {
   cart: Item[];
-    toggleCart: () => void;
+  toggleSearchBar: () => void;
+  toggleCart: () => void;
   location: string;
 }
 
-const Nav: React.FC<NavProps> = ({ cart, toggleCart, location }) => {
+const Nav: React.FC<NavProps> = ({
+  cart,
+  toggleSearchBar,
+  toggleCart,
+  location,
+}) => {
   return (
     <Wrapper $navbg={location !== ""}>
       <StyledLink to="/">
         <BrandName>athletic outfitters</BrandName>
       </StyledLink>
       <Div>
-        <StyledLink to="/shop">
-          <Li>Shop</Li>
-        </StyledLink>
+        <SearchLink onClick={toggleSearchBar}>
+          <IoSearchSharp style={{ fontSize: "1.25rem" }} />
+          <p style={{ verticalAlign: "center" }}>Search</p>
+        </SearchLink>
+        <StyledLink to="/shop">Shop</StyledLink>
         <Cart onClick={toggleCart}>
           <IconContext.Provider
             value={{

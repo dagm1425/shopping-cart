@@ -8,8 +8,9 @@ import Shop from "./pages/Shop";
 import ItemDetail from "./pages/ItemDetail";
 import bg from "./data/images/bg_main.jpg";
 import styled from "styled-components";
-import { Filters } from "./typings/sharedTypes";
+import { Filters, Item } from "./typings/sharedTypes";
 import { useAppContext } from "./context/context";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   const { state, dispatch } = useAppContext();
@@ -19,6 +20,9 @@ function App() {
   const totalPrice = state.cart.totalPrice;
   const sorting = state.sorting;
   const filters = state.filters;
+  const search = state.search.search;
+  const searchResults = state.search.searchResults;
+  const isSearchBarOpen = state.search.isSearchBarOpen;
   const path = useLocation().pathname;
   const location = path.split("/")[1];
 
@@ -134,7 +138,6 @@ function App() {
     });
 
     dispatch({ type: "SET_ITEMS", payload: filteredItems });
-    dispatch({ type: "SET_SORTING", payload: "sortDefault" });
   };
 
   const resetFilters = () => {
@@ -145,9 +148,37 @@ function App() {
     dispatch({ type: "TOGGLE_CART" });
   };
 
+  const setSearch = (search: string) => {
+    dispatch({ type: "SET_SEARCH", payload: search });
+  };
+
+  const setSearchResults = (results: Item[]) => {
+    dispatch({ type: "SET_SEARCH_RESULTS", payload: results });
+  };
+
+  const toggleSearchBar = () => {
+    dispatch({ type: "TOGGLE_SEARCH" });
+  };
+
   return (
     <Wrapper $bgImg={location === ""}>
-      <Nav cart={cart} toggleCart={toggleCart} location={location} />
+      <Nav
+        cart={cart}
+        toggleCart={toggleCart}
+        location={location}
+        toggleSearchBar={toggleSearchBar}
+      />
+      {isSearchBarOpen && (
+        <SearchBar
+          items={items}
+          search={search}
+          setSearch={setSearch}
+          searchResults={searchResults}
+          setSearchResults={setSearchResults}
+          isSearchBarOpen={isSearchBarOpen}
+          toggleSearchBar={toggleSearchBar}
+        />
+      )}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route

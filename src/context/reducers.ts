@@ -9,6 +9,11 @@ interface State {
   };
   filters: Filters;
   sorting: Sorting;
+  search: {
+    isSearchBarOpen: boolean;
+    search: string;
+    searchResults: Item[];
+  };
 }
 
 type ItemsAction = { type: "SET_ITEMS"; payload: Item[] };
@@ -32,16 +37,25 @@ type FilterAction =
 
 type SortingAction = { type: "SET_SORTING"; payload: Sorting };
 
-type Action = ItemsAction | CartAction | FilterAction | SortingAction;
+type SearchAction =
+  | { type: "TOGGLE_SEARCH" }
+  | { type: "SET_SEARCH"; payload: string }
+  | { type: "SET_SEARCH_RESULTS"; payload: Item[] };
+
+type Action =
+  | ItemsAction
+  | CartAction
+  | FilterAction
+  | SortingAction
+  | SearchAction;
 
 const itemsReducer = (
   state: State["items"],
   action: ItemsAction
 ): State["items"] => {
   switch (action.type) {
-    case "SET_ITEMS": {
+    case "SET_ITEMS":
       return action.payload;
-    }
     default:
       return state;
   }
@@ -147,11 +161,28 @@ const sortingReducer = (state: Sorting, action: SortingAction): Sorting => {
   }
 };
 
+const searchReducer = (
+  state: State["search"],
+  action: SearchAction
+): State["search"] => {
+  switch (action.type) {
+    case "TOGGLE_SEARCH":
+      return { ...state, isSearchBarOpen: !state.isSearchBarOpen };
+    case "SET_SEARCH":
+      return { ...state, search: action.payload };
+    case "SET_SEARCH_RESULTS":
+      return { ...state, searchResults: action.payload };
+    default:
+      return state;
+  }
+};
+
 const rootReducer = (state: State, action: Action): State => ({
   items: itemsReducer(state.items, action as ItemsAction),
   filters: filterReducer(state.filters, action as FilterAction),
   cart: cartReducer(state.cart, action as CartAction),
   sorting: sortingReducer(state.sorting, action as SortingAction),
+  search: searchReducer(state.search, action as SearchAction),
 });
 
 export { rootReducer, State, Action };
