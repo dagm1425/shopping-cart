@@ -33,8 +33,26 @@ const Shop: React.FC<ShopProps> = ({
   });
 
   useEffect(() => {
-    resetFilters();
+    if (areFiltersSet()) resetFilters();
   }, []);
+
+  const areFiltersSet = () => {
+    const { gender, brand, price } = filters;
+
+    for (const genderKey in gender) {
+      if (gender[genderKey]) return true;
+    }
+
+    for (const brandKey in brand) {
+      if (brand[brandKey]) return true;
+    }
+
+    for (const priceKey in price) {
+      if (price[priceKey]) return true;
+    }
+
+    return false;
+  };
 
   return (
     <>
