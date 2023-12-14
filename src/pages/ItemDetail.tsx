@@ -29,8 +29,8 @@ const MyImageMagnifyComponent: React.FC<ImageMagnifyProps> = ({ img }) => {
     smallImage: {
       alt: "",
       src: img,
-      width: 380,
-      height: 460,
+      width: 330,
+      height: 400,
       isFluidWidth: false,
     },
     largeImage: {
@@ -79,7 +79,7 @@ const ItemDetail: React.FC<ItemDetailProps> = ({ items, addToCart }) => {
           </LeftDiv1>
           <LeftDiv2>
             <MyImageMagnifyComponent img={img} />
-            <p>Roll over image to zoom in</p>
+            <ZoomText>Roll over image to zoom in</ZoomText>
           </LeftDiv2>
         </LeftDiv>
         <RightDiv>
@@ -121,14 +121,26 @@ const Wrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 4rem 0;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+
+  @media (max-width: 575px) {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem 0;
+  }
 `;
 
 const LeftDiv = styled.div`
   display: flex;
   height: 50vh;
   gap: 1.75rem;
+
+  @media (max-width: 575px) {
+    gap: 0rem;
+    height: auto;
+  }
 `;
 
 const LeftDiv1 = styled.div`
@@ -164,12 +176,25 @@ const SliderImg = styled.img`
   object-fit: contain;
 `;
 
+const ZoomText = styled.p`
+  display: block;
+
+  @media (max-width: 575px) {
+    display: none;
+  }
+`;
+
 const RightDiv = styled.div`
-  width: 70%;
+  width: 38%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 1.75rem;
+
+  @media (max-width: 575px) {
+    width: 100%;
+    padding: 0 1rem 1rem;
+  }
 `;
 
 const TitleH2 = styled.h2`
@@ -203,6 +228,10 @@ const AddToCartBtn = styled.button`
 
   &:hover {
     filter: brightness(0.9);
+  }
+
+  @media (max-width: 575px) {
+    width: 100%;
   }
 `;
 

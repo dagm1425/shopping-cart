@@ -74,13 +74,18 @@ const Wrapper = styled.nav<{ $navbg?: boolean }>`
   color: #fff;
   background-color: ${({ $navbg }) => ($navbg ? "#232f3e" : "transparent")};
   text-decoration: none;
+
+  @media (max-width: 575px) {
+    padding: 0 1rem;
+  }
 `;
 
 const BrandName = styled.p`
   text-transform: uppercase;
   letter-spacing: 0.15rem;
-  height: 35px;
-  line-height: 35px;
+  text-wrap: wrap;
+  // height: 35px;
+  // line-height: 35px;
 `;
 
 const Div = styled.div`

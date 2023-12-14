@@ -92,12 +92,21 @@ const Card = styled.div`
     opacity: 1;
     visibility: visible;
   }
+
+  @media (max-width: 575px) {
+    height: 40vh;
+  }
 `;
 
 const Img = styled.img`
   width: 220px;
   height: 260px;
   object-fit: contain;
+
+  @media (max-width: 575px) {
+    width: 180px;
+    height: 210px;
+  }
 `;
 
 const AddToCartBtn = styled.button`

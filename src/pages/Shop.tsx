@@ -4,6 +4,9 @@ import ItemCard from "../components/ItemCard";
 import { Item } from "../typings/sharedTypes";
 import { Filters } from "../typings/sharedTypes";
 import { IoIosArrowDown } from "react-icons/io";
+import { AiOutlineClose } from "react-icons/ai";
+import { IconContext } from "react-icons";
+import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 
 interface ShopProps {
   sortItems: (
@@ -32,6 +35,8 @@ const Shop: React.FC<ShopProps> = ({
     price: true,
   });
 
+  const [isFiltersDrawerOpen, setIsFiltersDrawerOpen] = useState(false);
+
   useEffect(() => {
     if (areFiltersSet()) resetFilters();
   }, []);
@@ -57,6 +62,15 @@ const Shop: React.FC<ShopProps> = ({
   return (
     <>
       <SorterWrapper>
+        <DrawerBtn onClick={() => setIsFiltersDrawerOpen(true)}>
+          <IconContext.Provider
+            value={{
+              style: { fontSize: "26px", color: "#000" },
+            }}
+          >
+            <HiOutlineAdjustmentsHorizontal />
+          </IconContext.Provider>
+        </DrawerBtn>
         <p>Sort</p>
         <StyledSelect
           value={sorting}
@@ -74,8 +88,20 @@ const Shop: React.FC<ShopProps> = ({
           <option value="sortPriceHtoL">highest price</option>
         </StyledSelect>
       </SorterWrapper>
-      <ItemsFiltersWrapper>
-        <FilterWrapper>
+      <Main>
+        <FilterWrapper $isFiltersDrawerOpen={isFiltersDrawerOpen}>
+          <FiltersHeader>
+            <p>Filter</p>
+            <CloseBtn onClick={() => setIsFiltersDrawerOpen(false)}>
+              <IconContext.Provider
+                value={{
+                  style: { fontSize: "22px", color: "#000" },
+                }}
+              >
+                <AiOutlineClose />
+              </IconContext.Provider>
+            </CloseBtn>
+          </FiltersHeader>
           <FilterGroup>
             <FilterHeader
               $collapsed={collapsedFilters.gender}
@@ -91,7 +117,7 @@ const Shop: React.FC<ShopProps> = ({
             </FilterHeader>
             <StyledHr />
             <FiltersInnerWrapper $collapsed={collapsedFilters.gender}>
-              <div>
+              <CheckBox>
                 <input
                   type="checkbox"
                   id="gender1"
@@ -101,8 +127,8 @@ const Shop: React.FC<ShopProps> = ({
                   onChange={(e) => updateFilters(e)}
                 />
                 <label htmlFor="gender1"> Men</label>
-              </div>
-              <div>
+              </CheckBox>
+              <CheckBox>
                 <input
                   type="checkbox"
                   id="gender2"
@@ -112,10 +138,9 @@ const Shop: React.FC<ShopProps> = ({
                   onChange={(e) => updateFilters(e)}
                 />
                 <label htmlFor="gender2"> Women</label>
-              </div>
+              </CheckBox>
             </FiltersInnerWrapper>
           </FilterGroup>
-
           <FilterGroup>
             <FilterHeader
               $collapsed={collapsedFilters.brand}
@@ -131,7 +156,7 @@ const Shop: React.FC<ShopProps> = ({
             </FilterHeader>
             <StyledHr />
             <FiltersInnerWrapper $collapsed={collapsedFilters.brand}>
-              <div>
+              <CheckBox>
                 <input
                   type="checkbox"
                   id="brand1"
@@ -141,8 +166,8 @@ const Shop: React.FC<ShopProps> = ({
                   onChange={(e) => updateFilters(e)}
                 />
                 <label htmlFor="brand1"> Hanes</label>
-              </div>
-              <div>
+              </CheckBox>
+              <CheckBox>
                 <input
                   type="checkbox"
                   id="brand2"
@@ -152,8 +177,8 @@ const Shop: React.FC<ShopProps> = ({
                   onChange={(e) => updateFilters(e)}
                 />
                 <label htmlFor="brand2"> Champion</label>
-              </div>
-              <div>
+              </CheckBox>
+              <CheckBox>
                 <input
                   type="checkbox"
                   id="brand3"
@@ -163,7 +188,7 @@ const Shop: React.FC<ShopProps> = ({
                   onChange={(e) => updateFilters(e)}
                 />
                 <label htmlFor="brand3"> Under Armour</label>
-              </div>
+              </CheckBox>
             </FiltersInnerWrapper>
           </FilterGroup>
           <FilterGroup>
@@ -181,7 +206,7 @@ const Shop: React.FC<ShopProps> = ({
             </FilterHeader>
             <StyledHr />
             <FiltersInnerWrapper $collapsed={collapsedFilters.price}>
-              <div>
+              <CheckBox>
                 <input
                   type="checkbox"
                   id="price1"
@@ -191,8 +216,8 @@ const Shop: React.FC<ShopProps> = ({
                   onChange={(e) => updateFilters(e)}
                 />
                 <label htmlFor="price1"> Up to $20</label>
-              </div>
-              <div>
+              </CheckBox>
+              <CheckBox>
                 <input
                   type="checkbox"
                   id="price2"
@@ -202,8 +227,8 @@ const Shop: React.FC<ShopProps> = ({
                   onChange={(e) => updateFilters(e)}
                 />
                 <label htmlFor="price2"> $20 to $25</label>
-              </div>
-              <div>
+              </CheckBox>
+              <CheckBox>
                 <input
                   type="checkbox"
                   id="price3"
@@ -213,9 +238,15 @@ const Shop: React.FC<ShopProps> = ({
                   onChange={(e) => updateFilters(e)}
                 />
                 <label htmlFor="price3"> $25 to $30</label>
-              </div>
+              </CheckBox>
             </FiltersInnerWrapper>
           </FilterGroup>
+          <FilterBtnWrapper>
+            <FilterResetBtn onClick={resetFilters}>clear all</FilterResetBtn>
+            <FilterResultsBtn onClick={() => setIsFiltersDrawerOpen(false)}>
+              view results
+            </FilterResultsBtn>
+          </FilterBtnWrapper>
         </FilterWrapper>
         {items.length > 0 ? (
           <ItemsGrid>
@@ -234,10 +265,19 @@ const Shop: React.FC<ShopProps> = ({
         ) : (
           <StyledP>No results found.</StyledP>
         )}
-      </ItemsFiltersWrapper>
+      </Main>
     </>
   );
 };
+
+const Main = styled.div`
+  display: flex;
+  padding: 2rem 4.5rem 2rem;
+
+  @media (max-width: 575px) {
+    padding: 1rem 1.25rem 1rem;
+  }
+`;
 
 const SorterWrapper = styled.div`
   display: flex;
@@ -250,6 +290,21 @@ const SorterWrapper = styled.div`
   border-radius: 6px;
 `;
 
+const DrawerBtn = styled.button`
+  display: none;
+
+  @media (max-width: 575px) {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    margin-right: auto;
+    padding: 0.5rem 2rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+`;
+
 const StyledSelect = styled.select`
   font: inherit;
   text-transform: capitalize;
@@ -259,12 +314,7 @@ const StyledSelect = styled.select`
   border-radius: 6px;
 `;
 
-const ItemsFiltersWrapper = styled.div`
-  display: flex;
-  padding: 2rem 4.5rem 2rem;
-`;
-
-const FilterWrapper = styled.div`
+const FilterWrapper = styled.div<{ $isFiltersDrawerOpen: boolean }>`
   width: 18%;
   display: flex;
   flex-direction: column;
@@ -272,6 +322,48 @@ const FilterWrapper = styled.div`
   font-size: 14px;
   padding-right: 1.25rem;
   padding-top: 1.25rem;
+
+  @media (max-width: 575px) {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    padding-left: 1.25rem;
+    background-color: #fff;
+    transform: ${({ $isFiltersDrawerOpen }) =>
+      $isFiltersDrawerOpen ? "translateX(0%)" : "translateX(-100%)"};
+    transition: 200ms ease-in-out;
+    z-index: 30;
+    overflow-y: auto;
+  }
+`;
+
+const FiltersHeader = styled.div`
+  display: none;
+
+  @media (max-width: 575px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0rem 2rem;
+
+    & svg {
+      margin-top: 2px;
+    }
+
+    & p {
+      font-size: 1.125rem;
+      text-transform: uppercase;
+    }
+  }
+`;
+
+const CloseBtn = styled.button`
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
 `;
 
 const FilterGroup = styled.div`
@@ -300,15 +392,55 @@ const FiltersInnerWrapper = styled.div<{ $collapsed: boolean }>`
   max-height: ${({ $collapsed }) => ($collapsed ? "200px" : "0")};
   overflow: hidden;
   transition: max-height 0.3s ease-in-out;
+`;
 
-  & div {
-    margin-bottom: 0.375rem;
-  }
+const CheckBox = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.425rem;
 `;
 
 const StyledHr = styled.hr`
-  margin: 0.625rem 0;
+  margin: 0.625rem 0 1rem;
   opacity: 0.6;
+`;
+
+const FilterBtnWrapper = styled.div`
+  display: none;
+
+  @media (max-width: 575px) {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+`;
+
+const FilterResetBtn = styled.button`
+  font-size: 0.9rem;
+  width: 35%;
+  font-weight: 700;
+  background-color: transparent;
+  text-transform: uppercase;
+  padding: 1.25rem 0.375rem;
+  border: 1px solid #000;
+  outline: none;
+  cursor: pointer;
+  z-index: 1;
+`;
+
+const FilterResultsBtn = styled.button`
+  font-size: 0.9rem;
+  width: 35%;
+  color: #fff;
+  background-color: #000;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 1.25rem 0.375rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  z-index: 1;
 `;
 
 const ItemsGrid = styled.div`
@@ -316,6 +448,11 @@ const ItemsGrid = styled.div`
   width: 82%;
   gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+
+  @media (max-width: 575px) {
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(142px, 1fr));
+  }
 `;
 
 const StyledP = styled.p`

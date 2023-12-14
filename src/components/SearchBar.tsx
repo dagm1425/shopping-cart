@@ -119,6 +119,10 @@ const SearchResultsContainer = styled.div<{ $isSearchBarOpen: boolean }>`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  @media (max-width: 575px) {
+    width: 80%;
+  }
 `;
 
 const SearchBarContainer = styled.div`

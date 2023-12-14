@@ -38,7 +38,7 @@ const Cart: React.FC<CartProps> = ({
     <>
       <CartWrapper $active={isCartOpen}>
         <CartHeader>
-          <h3>Cart</h3>
+          <p>Cart</p>
           <CloseBtn onClick={toggleCart}>
             <IconContext.Provider
               value={{
@@ -99,6 +99,10 @@ const CartWrapper = styled.div<{ $active?: boolean }>`
   transition: 200ms ease-in-out;
   z-index: 30;
   overflow-y: auto;
+
+  @media (max-width: 575px) {
+    width: 100%;
+  }
 `;
 
 const Overlay = styled.div<{ $active?: boolean }>`
@@ -115,15 +119,18 @@ const Overlay = styled.div<{ $active?: boolean }>`
 `;
 
 const CartHeader = styled.div`
-  height: 8%;
-  width: 85%;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem 2rem;
 
   & svg {
     margin-top: 6px;
+  }
+
+  & p {
+    font-size: 1.125rem;
+    text-transform: uppercase;
   }
 `;
 
@@ -224,6 +231,10 @@ const CartItemsWrapper = styled.div`
   flex-direction: column;
   gap: 1rem;
   margin-top: 3.75rem;
+
+  @media (max-width: 575px) {
+    margin-top: 2rem;
+  }
 `;
 
 export default Cart;

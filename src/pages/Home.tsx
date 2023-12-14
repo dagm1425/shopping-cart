@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Home() {
   return (
     <Container>
-      <H1>sweat in style</H1>
+      <Header>sweat in style</Header>
       <p>Grab your sportswear from our collection of renowned brands</p>
       <Link to="/shop">
         <Button>shop now</Button>
@@ -25,7 +25,7 @@ const Container = styled.div`
   padding-top: 9rem;
 `;
 
-const H1 = styled.h1`
+const Header = styled.h1`
   letter-spacing: 0.05rem;
   font-weight: 700;
   text-transform: uppercase;
