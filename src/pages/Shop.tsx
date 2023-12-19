@@ -7,39 +7,40 @@ import { IoIosArrowDown } from "react-icons/io";
 import { AiOutlineClose } from "react-icons/ai";
 import { IconContext } from "react-icons";
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
+import { useAppContext } from "src/context/context";
+import products from "src/data/allProducts";
 
 interface ShopProps {
-  sortItems: (
-    sorting: "sortDefault" | "sortPriceLtoH" | "sortPriceHtoL"
-  ) => void;
   items: Item[];
   addToCart: (id: string) => void;
-  filters: Filters;
-  updateFilters: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  resetFilters: () => void;
-  sorting: string;
 }
 
-const Shop: React.FC<ShopProps> = ({
-  sortItems,
-  items,
-  addToCart,
-  filters,
-  updateFilters,
-  resetFilters,
-  sorting,
-}) => {
+const Shop: React.FC<ShopProps> = ({ items, addToCart }) => {
+  const { state, dispatch } = useAppContext();
+  const sorting = state.sorting;
+  const filters = state.filters;
   const [collapsedFilters, setCollapsedFilters] = useState({
     gender: true,
     brand: true,
     price: true,
   });
-
   const [isFiltersDrawerOpen, setIsFiltersDrawerOpen] = useState(false);
 
   useEffect(() => {
     if (areFiltersSet()) resetFilters();
   }, []);
+
+  useEffect(() => {
+    filterItems();
+  }, [filters]);
+
+  useEffect(() => {
+    sorting === "sortDefault"
+      ? sortDefault()
+      : sorting === "sortPriceLtoH"
+      ? sortPriceLtoH()
+      : sortPriceHtoL();
+  }, [sorting]);
 
   const areFiltersSet = () => {
     const { gender, brand, price } = filters;
@@ -57,6 +58,96 @@ const Shop: React.FC<ShopProps> = ({
     }
 
     return false;
+  };
+
+  const sortItems = (
+    sorting: "sortDefault" | "sortPriceLtoH" | "sortPriceHtoL"
+  ) => {
+    dispatch({ type: "SET_SORTING", payload: sorting });
+  };
+
+  const sortDefault = () => {
+    const sortedItems = items
+      .slice()
+      .sort((a, b) => products.indexOf(a) - products.indexOf(b));
+    dispatch({ type: "SET_ITEMS", payload: sortedItems });
+  };
+
+  const sortPriceLtoH = () => {
+    const sortedItems = items.slice().sort((a, b) => a.price - b.price);
+    dispatch({ type: "SET_ITEMS", payload: sortedItems });
+  };
+
+  const sortPriceHtoL = () => {
+    const sortedItems = items.slice().sort((a, b) => b.price - a.price);
+    dispatch({ type: "SET_ITEMS", payload: sortedItems });
+  };
+
+  const updateFilters = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const param = e.target.name as keyof Filters;
+    const val = e.target.value as string;
+
+    dispatch({
+      type: "TOGGLE_FILTER",
+      payload: {
+        param,
+        val,
+      },
+    });
+  };
+
+  const collectFilters = () => {
+    interface AppliedFilters {
+      [key: string]: string[];
+    }
+
+    const { gender, brand, price } = filters;
+    const appliedFilters: AppliedFilters = {
+      gender: [],
+      brand: [],
+      price: [],
+    };
+
+    for (const genderKey in gender) {
+      if (gender[genderKey]) appliedFilters.gender.push(genderKey);
+    }
+
+    for (const brandKey in brand) {
+      if (brand[brandKey]) appliedFilters.brand.push(brandKey);
+    }
+
+    for (const priceKey in price) {
+      if (price[priceKey]) appliedFilters.price.push(priceKey);
+    }
+
+    return appliedFilters;
+  };
+
+  const filterItems = () => {
+    const filters = collectFilters();
+    const keys = Object.keys(filters);
+
+    const filteredItems = products.filter((product) => {
+      return keys.every((key) => {
+        if (!filters[key].length) return true;
+        if (key === "price") {
+          return filters[key].every((priceKey) => {
+            if (priceKey === "upTo20") return product[key] <= 20;
+            else if (priceKey === "from20To25")
+              return product[key] > 20 && product[key] <= 25;
+            else if (priceKey === "from25To30")
+              return product[key] > 25 && product[key] <= 30;
+          });
+        }
+        return filters[key].includes(product[key as keyof typeof product]);
+      });
+    });
+
+    dispatch({ type: "SET_ITEMS", payload: filteredItems });
+  };
+
+  const resetFilters = () => {
+    dispatch({ type: "RESET_FILTERS" });
   };
 
   return (

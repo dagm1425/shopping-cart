@@ -4,29 +4,34 @@ import { Item } from "src/typings/sharedTypes";
 import { IoIosSearch } from "react-icons/io";
 import { IoCloseOutline } from "react-icons/io5";
 import styled from "styled-components";
+import { useAppContext } from "src/context/context";
 
 interface SearchBarProps {
   items: Item[];
-  search: string;
-  setSearch: (value: string) => void;
-  searchResults: Item[];
-  setSearchResults: (value: Item[]) => void;
   isSearchBarOpen: boolean;
   toggleSearchBar: () => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
   items,
-  search,
-  setSearch,
-  searchResults,
-  setSearchResults,
   isSearchBarOpen,
   toggleSearchBar,
 }) => {
+  const { state, dispatch } = useAppContext();
+  const search = state.search.search;
+  const searchResults = state.search.searchResults;
+
   useEffect(() => {
     searchItems();
   }, [search]);
+
+  const setSearch = (search: string) => {
+    dispatch({ type: "SET_SEARCH", payload: search });
+  };
+
+  const setSearchResults = (results: Item[]) => {
+    dispatch({ type: "SET_SEARCH_RESULTS", payload: results });
+  };
 
   const searchItems = () => {
     const regExp = new RegExp(search, "gi");

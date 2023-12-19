@@ -6,22 +6,19 @@ import { AiOutlineClose } from "react-icons/ai";
 import { AiOutlineShopping } from "react-icons/ai";
 import { IconContext } from "react-icons";
 import { Item } from "src/typings/sharedTypes";
+import { useAppContext } from "src/context/context";
 
 interface CartProps {
   cart: Item[];
-  totalPrice: number;
   updateQuantity: (op: string, id: string) => void;
-  isCartOpen: boolean;
   toggleCart: () => void;
 }
 
-const Cart: React.FC<CartProps> = ({
-  cart,
-  totalPrice,
-  updateQuantity,
-  isCartOpen,
-  toggleCart,
-}) => {
+const Cart: React.FC<CartProps> = ({ cart, updateQuantity, toggleCart }) => {
+  const { state } = useAppContext();
+  const isCartOpen = state.cart.isCartOpen;
+  const totalPrice = state.cart.totalPrice;
+
   const cartItems = cart.map((item) => (
     <CartItem
       key={item.id}
@@ -230,11 +227,7 @@ const CartItemsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-top: 3.75rem;
-
-  @media (max-width: 575px) {
-    margin-top: 2rem;
-  }
+  margin-top: 0.5rem;
 `;
 
 export default Cart;
