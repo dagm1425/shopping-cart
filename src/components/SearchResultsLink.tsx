@@ -5,15 +5,15 @@ import styled from "styled-components";
 
 interface SearchResultsLinkProps {
   result: Item;
-  toggleSearchBar: () => void;
+  closeSearch: () => void;
 }
 
 const SearchResultsLink: React.FC<SearchResultsLinkProps> = ({
   result,
-  toggleSearchBar,
+  closeSearch,
 }) => {
   return (
-    <StyledLink to={`/shop/${result.id}`} onClick={toggleSearchBar}>
+    <StyledLink to={`/shop/${result.id}`} onClick={closeSearch}>
       <ImgWrapper>
         <Img src={result.img} alt={result.title} />
       </ImgWrapper>

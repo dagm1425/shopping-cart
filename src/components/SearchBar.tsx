@@ -50,7 +50,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         <SearchResultsLink
           key={result.id}
           result={result}
-          toggleSearchBar={toggleSearchBar}
+          closeSearch={closeSearch}
         />
       ))
     );
