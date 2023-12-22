@@ -19,6 +19,8 @@ const CheckoutBtn: React.FC<CheckoutBtnProps> = ({ lineItems }) => {
   const handleClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
+    alert("Use 4242424242424242 as test card to process payment");
+
     const stripe = await stripePromise;
 
     if (!stripe) {
