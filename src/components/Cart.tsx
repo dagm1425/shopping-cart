@@ -7,6 +7,8 @@ import { AiOutlineShopping } from "react-icons/ai";
 import { IconContext } from "react-icons";
 import { Item } from "src/typings/sharedTypes";
 import { useAppContext } from "src/context/context";
+import CheckoutBtn from "./CheckoutBtn";
+import MainBtn from "./MainBtn";
 
 interface CartProps {
   cart: Item[];
@@ -19,6 +21,10 @@ const Cart: React.FC<CartProps> = ({ cart, updateQuantity, toggleCart }) => {
   const isCartOpen = state.cart.isCartOpen;
   const totalPrice = state.cart.totalPrice;
 
+  const lineItems = cart.map((item) => ({
+    price: item.priceId,
+    quantity: item.quantity,
+  }));
   const cartItems = cart.map((item) => (
     <CartItem
       key={item.id}
@@ -55,7 +61,7 @@ const Cart: React.FC<CartProps> = ({ cart, updateQuantity, toggleCart }) => {
                 <SubTotSpan>{"$" + totalPrice.toFixed(2)}</SubTotSpan>
               </SubTotWrapper>
             </div>
-            <CheckoutBtn>Checkout</CheckoutBtn>
+            <CheckoutBtn lineItems={lineItems} />
           </LoadedCartWrapper>
         ) : (
           <EmptyCartWrapper>
@@ -172,55 +178,6 @@ const SubTotP = styled.p`
 
 const SubTotSpan = styled.span`
   font-size: 1.25rem;
-`;
-
-const MainBtn = styled.button`
-  position: relative;
-  font-size: 0.9rem;
-  letter-spacing: 0.05rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  width: 75%;
-  background-color: transparent;
-  padding: 2rem 0;
-  border: 1px solid #000;
-  outline: none;
-  cursor: pointer;
-  z-index: 1;
-  transition: 200ms ease-in-out;
-
-  & a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  &:hover,
-  &:focus {
-    color: #fff;
-  }
-
-  &:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: -1;
-    background-color: #000;
-    transition: 250ms ease-in-out;
-    transform: scaleX(0);
-    transform-origin: left;
-  }
-
-  &:hover::before,
-  &:focus::before {
-    transform: scaleX(1);
-  }
-`;
-
-const CheckoutBtn = styled(MainBtn)`
-  margin: 6rem 0rem;
 `;
 
 const CartItemsWrapper = styled.div`

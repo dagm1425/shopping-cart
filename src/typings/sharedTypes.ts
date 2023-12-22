@@ -5,6 +5,7 @@ export interface Item {
   img: string;
   gallery: string[];
   price: number;
+  priceId: string;
   quantity: number;
   gender: string;
   rating: number;

@@ -9,6 +9,7 @@ import bg from "./data/images/bg_main.jpg";
 import styled from "styled-components";
 import { useAppContext } from "./context/context";
 import SearchBar from "./components/SearchBar";
+import PaymentSuccess from "./pages/PaymentSuccess";
 
 function App() {
   const { state, dispatch } = useAppContext();
@@ -67,6 +68,7 @@ function App() {
           path="/shop/:id"
           element={<ItemDetail items={items} addToCart={addToCart} />}
         />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="*" element={<Home />} />
       </Routes>
       <Cart
