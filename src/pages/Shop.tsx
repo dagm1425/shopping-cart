@@ -540,6 +540,7 @@ const ItemsGrid = styled.div`
   @media (max-width: 575px) {
     width: 100%;
     grid-template-columns: repeat(auto-fill, minmax(142px, 1fr));
+    grid-row-gap: 1.5rem;
   }
 `;
 
