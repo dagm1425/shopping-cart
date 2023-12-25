@@ -91,7 +91,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
               products
             </p>
 
-            <hr style={{ marginBottom: "1rem", opacity: "0.5" }} />
+            <hr style={{ marginBottom: "0.75rem", opacity: "0.5" }} />
           </>
         )}
         {renderSearchResults()}
@@ -114,7 +114,7 @@ const SearchResultsContainer = styled.div<{ $isSearchBarOpen: boolean }>`
   display: ${({ $isSearchBarOpen }) => ($isSearchBarOpen ? "block" : "none")};
   background-color: #fff;
   opacity: ${({ $isSearchBarOpen }) => ($isSearchBarOpen ? "1" : "0")};
-  padding: 1rem 1rem 2rem;
+  padding: 1rem 0.75rem;
   overflow-y: auto;
   z-index: 10;
   border: 3px solid #eee;

@@ -69,7 +69,8 @@ const Wrapper = styled.nav<{ $navbg?: boolean }>`
   width: 100%;
   min-height: 9vh;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0 3rem;
   align-items: center;
   color: #fff;
   background-color: ${({ $navbg }) => ($navbg ? "#232f3e" : "transparent")};

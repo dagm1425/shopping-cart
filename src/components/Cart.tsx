@@ -45,7 +45,10 @@ const Cart: React.FC<CartProps> = ({ cart, updateQuantity, toggleCart }) => {
           <CloseBtn onClick={toggleCart}>
             <IconContext.Provider
               value={{
-                style: { fontSize: "26px", color: "#000" },
+                style: {
+                  fontSize: "22px",
+                  color: "#000",
+                },
               }}
             >
               <AiOutlineClose />
@@ -65,7 +68,7 @@ const Cart: React.FC<CartProps> = ({ cart, updateQuantity, toggleCart }) => {
           </LoadedCartWrapper>
         ) : (
           <EmptyCartWrapper>
-            <h3>Your cart is empty.</h3>
+            <p style={{ fontSize: "1.125rem" }}>Your cart is empty.</p>
             <IconContext.Provider
               value={{
                 style: {
@@ -92,7 +95,7 @@ const Cart: React.FC<CartProps> = ({ cart, updateQuantity, toggleCart }) => {
 
 const CartWrapper = styled.div<{ $active?: boolean }>`
   position: fixed;
-  width: 35%;
+  width: 33%;
   height: 100vh;
   top: 0;
   right: 0;
@@ -177,7 +180,7 @@ const SubTotP = styled.p`
 `;
 
 const SubTotSpan = styled.span`
-  font-size: 1.25rem;
+  font-size: 1.125rem;
 `;
 
 const CartItemsWrapper = styled.div`

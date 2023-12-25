@@ -32,7 +32,7 @@ const CartItem: React.FC<CartItemProps> = ({
           <QtyBtn onClick={() => updateQuantity("-", id)}>
             <IconContext.Provider
               value={{
-                style: { fontSize: "18px", color: "#000" },
+                style: { fontSize: "16px", color: "#000" },
               }}
             >
               <AiOutlineMinus />
@@ -42,7 +42,7 @@ const CartItem: React.FC<CartItemProps> = ({
           <QtyBtn onClick={() => updateQuantity("+", id)}>
             <IconContext.Provider
               value={{
-                style: { fontSize: "18px", color: "#000" },
+                style: { fontSize: "16px", color: "#000" },
               }}
             >
               <AiOutlinePlus />
@@ -58,10 +58,14 @@ const ItemWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-  width: 85%;
+  width: 410px;
   margin: 0 auto;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid #b0b0b0;
+
+  @media (max-width: 575px) {
+    width: 360px;
+  }
 `;
 
 const ImgWrapper = styled.div`
@@ -77,10 +81,12 @@ const Img = styled.img`
 `;
 
 const TitleP = styled.p`
+  font-size: 0.925rem;
   margin-bottom: 0.5rem;
 `;
 
 const PriceP = styled.p`
+  font-size: 0.925rem;
   font-weight: 700;
   margin-bottom: 0.75rem;
 `;
@@ -90,7 +96,7 @@ const QtyController = styled.div`
   width: fit-content;
   align-items: center;
   gap: 8px;
-  padding: 4px;
+  padding: 3px;
   border: 0.75px solid #a6a6a6;
   border-radius: 5px;
 `;

@@ -333,7 +333,7 @@ const Shop: React.FC<ShopProps> = ({ items, addToCart }) => {
             </FiltersInnerWrapper>
           </FilterGroup>
           <FilterBtnWrapper>
-            <FilterResetBtn onClick={resetFilters}>clear all</FilterResetBtn>
+            <FilterBtn onClick={resetFilters}>clear all</FilterBtn>
             <FilterResultsBtn onClick={() => setIsFiltersDrawerOpen(false)}>
               view results
             </FilterResultsBtn>
@@ -437,7 +437,8 @@ const FiltersHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0rem 2rem;
+    padding: 0rem 0.325rem;
+    margin-bottom: 1rem;
 
     & svg {
       margin-top: 2px;
@@ -463,6 +464,11 @@ const FilterGroup = styled.div`
 
   & p {
     font-weight: 700;
+  }
+
+  @media (max-width: 575px) {
+    width: 85%;
+    margin: 0 auto;
   }
 `;
 
@@ -501,37 +507,28 @@ const FilterBtnWrapper = styled.div`
 
   @media (max-width: 575px) {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
     justify-content: center;
-    margin-top: 1rem;
+    margin-top: 1.25rem;
   }
 `;
 
-const FilterResetBtn = styled.button`
+const FilterBtn = styled.button`
   font-size: 0.9rem;
   width: 35%;
   font-weight: 700;
   background-color: transparent;
   text-transform: uppercase;
-  padding: 1.25rem 0.375rem;
+  padding: 1rem 0.375rem;
   border: 1px solid #000;
   outline: none;
   cursor: pointer;
   z-index: 1;
 `;
 
-const FilterResultsBtn = styled.button`
-  font-size: 0.9rem;
-  width: 35%;
+const FilterResultsBtn = styled(FilterBtn)`
   color: #fff;
   background-color: #000;
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 1.25rem 0.375rem;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  z-index: 1;
 `;
 
 const ItemsGrid = styled.div`

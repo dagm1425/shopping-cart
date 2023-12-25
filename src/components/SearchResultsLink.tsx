@@ -31,7 +31,8 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   color: inherit;
   background-color: #fff;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
+  padding-left: 2px;
   border-radius: 4px;
 
   &:hover {
