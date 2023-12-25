@@ -32,8 +32,8 @@ const CheckoutBtn: React.FC<CheckoutBtnProps> = ({ lineItems }) => {
       const { error } = await stripe.redirectToCheckout({
         lineItems,
         mode: "payment",
-        successUrl: "http://localhost:3000/payment-success",
-        cancelUrl: "http://localhost:3000/shop",
+        successUrl: "https://dn-shopping-cart.netlify.app/payment-success",
+        cancelUrl: "https://dn-shopping-cart.netlify.app/shop",
       });
 
       if (error) {
