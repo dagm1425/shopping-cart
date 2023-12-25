@@ -366,7 +366,7 @@ const Main = styled.div`
   padding: 2rem 4.5rem 2rem;
 
   @media (max-width: 575px) {
-    padding: 1rem 1.25rem 1rem;
+    padding: 0rem 1.25rem 1rem;
   }
 `;
 
@@ -379,6 +379,10 @@ const SorterWrapper = styled.div`
   align-items: center;
   gap: 8px;
   border-radius: 6px;
+
+  @media (max-width: 575px) {
+    padding: 0.25rem 0;
+  }
 `;
 
 const DrawerBtn = styled.button`
