@@ -25,7 +25,7 @@ const CartItem: React.FC<CartItemProps> = ({
       <ImgWrapper>
         <Img src={img} alt={title} />
       </ImgWrapper>
-      <div>
+      <DeatailWrapper>
         <TitleP>{title}</TitleP>
         <PriceP>{"$" + price.toFixed(2)}</PriceP>
         <QtyController>
@@ -49,7 +49,7 @@ const CartItem: React.FC<CartItemProps> = ({
             </IconContext.Provider>
           </QtyBtn>
         </QtyController>
-      </div>
+      </DeatailWrapper>
     </ItemWrapper>
   );
 };
@@ -78,6 +78,14 @@ const Img = styled.img`
   height: 100%;
   width: 100%;
   object-fit: contain;
+`;
+
+const DeatailWrapper = styled.div`
+  width: 300px;
+
+  @media (max-width: 575px) {
+    width: 250px;
+  }
 `;
 
 const TitleP = styled.p`
