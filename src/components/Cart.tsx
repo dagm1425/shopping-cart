@@ -103,7 +103,7 @@ const CartWrapper = styled.div<{ $active?: boolean }>`
   transform: ${({ $active }) =>
     $active ? "translateX(0%)" : "translateX(100%)"};
   transition: 200ms ease-in-out;
-  z-index: 30;
+  z-index: 40;
   overflow-y: auto;
 
   @media (max-width: 575px) {
@@ -121,7 +121,7 @@ const Overlay = styled.div<{ $active?: boolean }>`
   transition: 200ms ease-in-out;
   background-color: rgba(0, 0, 0, 0.5);
   pointer-events: ${({ $active }) => ($active ? "all" : "none")};
-  z-index: 10;
+  z-index: 20;
 `;
 
 const CartHeader = styled.div`

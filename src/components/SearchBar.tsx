@@ -116,7 +116,7 @@ const SearchResultsContainer = styled.div<{ $isSearchBarOpen: boolean }>`
   opacity: ${({ $isSearchBarOpen }) => ($isSearchBarOpen ? "1" : "0")};
   padding: 1rem 0.75rem;
   overflow-y: auto;
-  z-index: 10;
+  z-index: 40;
   border: 3px solid #eee;
   border-radius: 30px;
   transition: 200ms ease-in-out;
@@ -181,7 +181,7 @@ const Overlay = styled.div<{ $isSearchBarOpen: boolean }>`
   opacity: ${({ $isSearchBarOpen }) => ($isSearchBarOpen ? "1" : "0")};
   background-color: rgba(0, 0, 0, 0.3);
   transition: 200ms ease-in-out;
-  z-index: 4;
+  z-index: 20;
   pointer-events: ${({ $isSearchBarOpen }) =>
     $isSearchBarOpen ? "all" : "none"};
 `;

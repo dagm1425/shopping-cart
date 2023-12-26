@@ -25,7 +25,7 @@ interface ItemDetailProps {
 
 const MyImageMagnifyComponent: React.FC<ImageMagnifyProps> = ({ img }) => {
   const magnifyProps: CustomImageMagnifyProps = {
-    style: { zIndex: 100 },
+    style: { zIndex: 10 },
     smallImage: {
       alt: "",
       src: img,
