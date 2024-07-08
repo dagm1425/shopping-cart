@@ -93,6 +93,14 @@ const Card = styled.div`
     visibility: visible;
   }
 
+  @media (max-width: 1024px) {
+    height: 32vh;
+  }
+
+  @media (max-width: 768px) {
+    height: 37vh;
+  }
+
   @media (max-width: 575px) {
     height: 40vh;
   }

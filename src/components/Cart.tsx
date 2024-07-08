@@ -106,6 +106,10 @@ const CartWrapper = styled.div<{ $active?: boolean }>`
   z-index: 40;
   overflow-y: auto;
 
+  @media (max-width: 1024px) {
+    width: 55%;
+  }
+
   @media (max-width: 575px) {
     width: 100%;
   }

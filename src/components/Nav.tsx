@@ -76,6 +76,11 @@ const Wrapper = styled.nav<{ $navbg?: boolean }>`
   background-color: ${({ $navbg }) => ($navbg ? "#232f3e" : "transparent")};
   text-decoration: none;
 
+  @media (max-width: 1024px) {
+    min-height: 7vh;
+    padding: 0 2rem;
+  }
+
   @media (max-width: 575px) {
     padding: 0 1rem;
   }

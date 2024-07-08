@@ -45,6 +45,7 @@ const MyImageMagnifyComponent: React.FC<ImageMagnifyProps> = ({ img }) => {
     enlargedImageContainerStyle: {
       backgroundColor: "#fff",
     },
+    pressDuration: 250,
   };
 
   return <ReactImageMagnify {...magnifyProps} />;

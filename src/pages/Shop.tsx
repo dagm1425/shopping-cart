@@ -365,6 +365,10 @@ const Main = styled.div`
   display: flex;
   padding: 2rem 4.5rem 2rem;
 
+  @media (max-width: 1024px) {
+    padding: 0.25rem 2rem 1rem;
+  }
+
   @media (max-width: 575px) {
     padding: 0rem 1.25rem 1rem;
   }
@@ -540,6 +544,10 @@ const ItemsGrid = styled.div`
   width: 82%;
   gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+
+  @media (max-width: 768px) {
+    gap: 0;
+  }
 
   @media (max-width: 575px) {
     width: 100%;
