@@ -13,7 +13,7 @@
 
 - Filter and sort products
 - Search products
-- View product detail (including zoom)
+- View product detail 
 - Add products to cart
 - Adjust quantities in cart
 - View cart total
